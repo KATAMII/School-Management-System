@@ -1,0 +1,92 @@
+body {
+    margin: 0;
+    font-family:"poppins" ,sans-serif,
+  }
+  
+  .home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background: url(../assets/schoolbg.jpeg);
+  }
+  
+  .navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0;
+  }
+  
+  .navbar-logo img {
+    width: 50px;
+    height: auto;
+  }
+  
+  .navbar-links {
+    display: flex;
+    list-style: none;
+  }
+  
+  .navbar-links li {
+    margin: 0 10px;
+    font-size: 1.3rem;
+  }
+  
+  .navbar-links a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .navbar-buttons button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    background-color: #C0754D;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1.2rem;
+  }
+  
+  .navbar-buttons button a {
+    color: white;
+    text-decoration: none;
+    
+  }
+  
+  .navbar-buttons button:hover {
+    background-color: #0056b3;
+  }
+  
+  .home-body {
+    text-align: center;
+    margin-top: 100px;
+    color: white;
+  }
+  
+  .admin-register-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #C0754D;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+ .title{
+    font-size: 2rem;
+ } 
+  .admin-register-link:hover {
+    background-color: #218838;
+  }
+  
