@@ -19,7 +19,7 @@ function ChooseUser() {
         <div className="card" onClick={() => handleLogin('Studentsignin')}>
           <h2>Student</h2>
         </div>
-        <div className="card" onClick={() => handleLogin('Teacherssignin')}>
+        <div className="card" onClick={() => handleLogin('Teachersignin')}>
           <h2>Teacher</h2>
         </div>
       </div>

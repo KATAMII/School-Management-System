@@ -38,12 +38,9 @@ body {
   
   .navbar-links li {
     margin: 0 10px;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
   }
-  .navbar-links li:hover{
-    background-color: #0056b3;
-    padding: 0.5rem;
-  }
+  
   .navbar-links a {
     color: white;
     text-decoration: none;
@@ -57,15 +54,20 @@ body {
     color: white;
     cursor: pointer;
     border-radius: 5px;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
-  
+  .navbar-links li:hover{
+    background-color: #0056b3;
+    padding: 3px;
+    border-radius: 5px;
+  }
   .navbar-buttons button a {
     color: white;
     text-decoration: none;
-    
   }
-  
+  .navbar-buttons{
+    display: flex;
+  }
   .navbar-buttons button:hover {
     background-color: #0056b3;
   }
@@ -84,10 +86,10 @@ body {
     color: white;
     text-decoration: none;
     border-radius: 5px;
-    font-size: 1rem;
+    font-size: 1.3rem;
   }
  .title{
-    font-size: 2.5rem;
+    font-size: 2rem;
  } 
   .admin-register-link:hover {
     background-color: #218838;

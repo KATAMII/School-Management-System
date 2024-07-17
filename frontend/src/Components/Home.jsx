@@ -24,13 +24,13 @@ function Home() {
           <li><Link to="/contact">Contact Us</Link></li>
         </ul>
         <div className="navbar-buttons">
-          <button onClick={handleLogin}>Sign In</button>
-          <button><Link to="/guest">Guest Mode</Link></button>
+          <button onClick={handleLogin}>SignIn</button>
+          <button><Link to="/guest">Guest</Link></button>
         </div>
       </nav>
       <div className="home-body">
         <h1 className='title'>School Management System</h1>
-        <Link to="/admin-register" className="admin-register-link">Admin Register</Link>
+        <Link to="/AdminRegister" className="admin-register-link">Admin Register</Link>
       </div>
     </div>
   );
