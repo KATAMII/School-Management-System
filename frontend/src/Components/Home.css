@@ -40,7 +40,10 @@ body {
     margin: 0 10px;
     font-size: 1.3rem;
   }
-  
+  .navbar-links li:hover{
+    background-color: #0056b3;
+    padding: 0.5rem;
+  }
   .navbar-links a {
     color: white;
     text-decoration: none;
@@ -84,7 +87,7 @@ body {
     font-size: 1rem;
   }
  .title{
-    font-size: 2rem;
+    font-size: 2.5rem;
  } 
   .admin-register-link:hover {
     background-color: #218838;

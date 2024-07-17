@@ -2,13 +2,14 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import bg from '../assets/schoolbg.jpeg';
 import logo from '../assets/schoologo.jpeg';
+import ChooseUser from './ChooseUser';
 import './Home.css';
 
 function Home() {
   const navigate = useNavigate();
 
   function handleLogin() {
-    navigate('/login');
+    navigate('/ChooseUser');
   }
 
   return (
