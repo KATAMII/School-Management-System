@@ -9,19 +9,19 @@ const Sidebar = () => {
       <nav>
         <ul>
           <li>
-            <NavLink to="/admin/students" activeClassName="active-link">Students</NavLink>
+            <NavLink to="/admin/students" className={({ isActive }) => (isActive ? 'active-link' : '')}>Students</NavLink>
           </li>
           <li>
-            <NavLink to="/admin/teachers" activeClassName="active-link">Teachers</NavLink>
+            <NavLink to="/admin/teachers" className={({ isActive }) => (isActive ? 'active-link' : '')}>Teachers</NavLink>
           </li>
           <li>
-            <NavLink to="/admin/announcements" activeClassName="active-link">Announcements</NavLink>
+            <NavLink to="/admin/announcements" className={({ isActive }) => (isActive ? 'active-link' : '')}>Announcements</NavLink>
           </li>
           <li>
-            <NavLink to="/admin/assignment" activeClassName="active-link">Assignments</NavLink>
+            <NavLink to="/admin/assignment" className={({ isActive }) => (isActive ? 'active-link' : '')}>Assignments</NavLink>
           </li>
           <li>
-            <NavLink to="/admin/classes" activeClassName="active-link">Classes</NavLink>
+            <NavLink to="/admin/classes" className={({ isActive }) => (isActive ? 'active-link' : '')}>Classes</NavLink>
           </li>
         </ul>
       </nav>

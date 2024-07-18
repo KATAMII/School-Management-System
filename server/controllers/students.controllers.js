@@ -9,7 +9,7 @@ export const createStudent = async (req, res) => {
     const { name, email, password } = req.body;
 
     const hashpassword = bcrypt.hashSync(password, 10);
-    const newuser = await prisma.student.create({
+    const newstudent = await prisma.student.create({
       data: {
         name,
         email,
@@ -56,3 +56,11 @@ export const loginStudent = async (req, res) => {
     return res.status(500).json({ success: false, message: e.message });
   }
 };
+export const getStudents = async (req, res) => {
+    try {
+      const students = await prisma.student.findMany();
+      res.status(200).json({ success: true, data: students });
+    } catch (error) {
+      res.status(500).json({ success: false, message: 'Error fetching students' });
+    }
+  };
