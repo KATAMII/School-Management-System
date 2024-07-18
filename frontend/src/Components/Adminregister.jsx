@@ -17,7 +17,7 @@ const AdminRegister = () => {
     try {
       setLoading(true);
       setError(false);
-      const response = await fetch(`${apiBase}/api/admin/register`, {
+      const response = await fetch(`${apiBase}/api/student/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

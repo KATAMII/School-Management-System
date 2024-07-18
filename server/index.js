@@ -2,6 +2,7 @@ import express from "express";
 import { config } from "dotenv";
 import cookieParser from "cookie-parser";
 import usersRouter from "./routes/users.route.js"
+import studentsRouter from "./routes/students.routes.js"
 import cors from "cors";
 
 config();
@@ -18,6 +19,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser()); 
 app.use("/api/admin", usersRouter);
+app.use("/api/student", studentsRouter);
+
 
 
 
