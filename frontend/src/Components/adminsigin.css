@@ -2,7 +2,9 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
   }
-  
+  .Toastify__toast-container {
+    z-index: 9999;
+  }
   .admin-register-container {
     display: flex;
     flex-direction: column;

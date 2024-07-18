@@ -50,7 +50,7 @@ export const loginUser = async (req, res) => {
       expiresIn: "5h",
     });
 
-    res.cookie("hotel_access_token", token);
+    res.cookie("admin_access_token", token);
     return res.status(200).json({ success: true, data: payload, token });
   } catch (e) {
     return res.status(500).json({ success: false, message: e.message });
