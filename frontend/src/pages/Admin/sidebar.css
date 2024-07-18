@@ -19,6 +19,7 @@ body {
     text-align: center;
     color: #fff;
     margin-bottom: 20px;
+    font-size: 2rem;
   }
   
   .sidebar nav ul {
@@ -28,6 +29,7 @@ body {
   
   .sidebar nav ul li {
     margin: 10px 0;
+
   }
   
   .sidebar nav ul li a {
@@ -36,11 +38,12 @@ body {
     padding: 10px 15px;
     display: block;
     transition: 0.3s;
+    font-size: 1.5rem;
   }
   
   .sidebar nav ul li a:hover,
   .sidebar nav ul li a.active-link {
-    background-color: #575757;
+    background-color: rgba(0, 123, 255, 0.8);;
     color: #fff;
   }
   
