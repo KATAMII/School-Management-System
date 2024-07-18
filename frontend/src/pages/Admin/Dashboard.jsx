@@ -8,6 +8,7 @@ import Students from './Students'
 function Dashboard() {
   return (
     <div>
+      <Sidebar/>
       <h1>helllo dashboard</h1>
     </div>
   )
