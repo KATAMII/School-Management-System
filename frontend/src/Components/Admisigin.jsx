@@ -28,7 +28,7 @@ const Adminsignin = () => {
         document.cookie = `admin_access_token=${data.token}; path=/`;
         localStorage.setItem('user_id', data.data.id);
         setIsLoggedIn(true);
-        navigate('/Dashboard');
+        navigate('/admin/dashboard');
         toast(data.message,{theme:"success"})
         toast.success('Admin logged in successfully!');
       } else {

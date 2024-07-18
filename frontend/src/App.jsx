@@ -10,6 +10,12 @@ import Dashboard from './pages/Admin/Dashboard'
 import { AuthProvider } from '../../server/Authentication/authentication'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Sidebar from './pages/Admin/Sidebar'
+import Classes from './pages/Admin/classes'
+import Assignment from './pages/Admin/Assignment'
+import Announcements from './pages/Admin/Announcements'
+import Students from './pages/Admin/Students'
+import Teachers from './pages/Admin/Teachers'
 function App() {
   
 
@@ -23,7 +29,13 @@ function App() {
         <Route path='/Adminsignin' element={<Adminsignin/>}/>
         <Route path='/Studentsignin' element={<Studentsignin/>}/>
         <Route path='/Teachersignin' element={<Teachersignin/>}/>
-        <Route path='/Dashboard' element={<Dashboard/>}/>
+        <Route path='/admin/dashboard' element={<Dashboard/>}/>
+        <Route path='/admin/sidebar' element={<Sidebar/>}/>
+        <Route path='/admin/classes' element={<Classes/>}/>
+        <Route path='/admin/assignment' element={<Assignment/>}/>
+        <Route path='/admin/students' element={<Students/>}/>
+        <Route path='/admin/teachers' element={<Teachers/>}/>
+        <Route path='/admin/announcements' element={<Announcements/>}/>
       </Routes>
     </Router>
     </AuthProvider>
