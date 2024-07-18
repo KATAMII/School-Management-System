@@ -89,16 +89,19 @@ const Students = () => {
             <h3>John Doe</h3>
             <p>Email: johndoe@example.com</p>
             <p>Class: 10A</p>
+            <button className="delete-button">Delete</button>
           </div>
           <div className="student-card">
             <h3>John Doe</h3>
             <p>Email: johndoe@example.com</p>
             <p>Class: 10A</p>
+            <button className="delete-button">Delete</button>
           </div>
           <div className="student-card">
             <h3>John Doe</h3>
             <p>Email: johndoe@example.com</p>
             <p>Class: 10A</p>
+            <button className="delete-button">Delete</button>
           </div>
           <div className="student-card">
             <h3>John Doe</h3>
