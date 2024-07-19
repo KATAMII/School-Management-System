@@ -1,33 +1,62 @@
-import React from 'react';
+
+import React, { useState, useContext } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import './adminsigin.css';
+import { useNavigate } from 'react-router-dom';
+import { apiBase } from '../../utils/config';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import AuthContext from '../../../server/Authentication/authentication';
 
 
 const Teachersignin = () => {
+  const [loading, setLoading] = useState(false);
+  const { setIsLoggedIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (values) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`${apiBase}/api/teacher/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
+      const data = await response.json();
+      if (data.success) {
+        document.cookie = `student_access_token=${data.token}; path=/`;
+        localStorage.setItem('user_id', data.data.id);
+        setIsLoggedIn(true);
+        navigate('/teacher/dashboard');
+        toast.success('Student logged in successfully!');
+      } else {
+        toast.error(data.message);
+      }
+    } catch (e) {
+      toast.error('An error occurred. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const initialValues = {
-    name: '',
     email: '',
     password: '',
-    confirmPassword: '',
   };
 
   const validationSchema = Yup.object({
-    name: Yup.string().required('Required'),
     email: Yup.string().email('Invalid email format').required('Required'),
     password: Yup.string().min(6, 'Password should be minimum 6 characters').required('Required'),
-    confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match').required('Required'),
   });
- 
-  const onSubmit = (values) => {
-    console.log('Form data', values);
-    
-  };
+
 
   return (
     <div className="admin-register-container">
       <h1>Teacher Login</h1>
-      <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+      <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
         <Form className="form">
           
           <div className="form-control">

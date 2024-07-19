@@ -17,6 +17,7 @@ import Announcements from './pages/Admin/Announcements'
 import Students from './pages/Admin/Students'
 import Teachers from './pages/Admin/Teachers'
 import StudentDashboard from './pages/Student/Dashboard'
+import TeacherDashboard from './pages/Teacher/Dashboard'
 function App() {
   
 
@@ -38,6 +39,7 @@ function App() {
         <Route path='/admin/teachers' element={<Teachers/>}/>
         <Route path='/admin/announcements' element={<Announcements/>}/>
         <Route path='/student/dashboard' element={<StudentDashboard/>}/>
+        <Route path='/teacher/dashboard' element={<TeacherDashboard/>}/>
       </Routes>
     </Router>
     </AuthProvider>
