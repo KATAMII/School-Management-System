@@ -48,3 +48,21 @@ model teacher {
 
   @@map("teachers_table")
 }
+model Assignments {
+  id        String   @id @default(uuid())
+  title     String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@map("assignments_table")
+}
+model Announcements {
+  id        String   @id @default(uuid())
+  title     String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@map("anouncements_table")
+}

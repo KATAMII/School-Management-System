@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import Sidebar from './Sidebar';
 import './Assignment.css';
+import { apiBase } from '../../../utils/config'; 
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Assignment = () => {
-  const [announcements, setAnnouncements] = useState([]);
+  const [assignments, setAssignments] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const initialValues = {
     title: '',
@@ -17,16 +22,57 @@ const Assignment = () => {
     content: Yup.string().required('Required'),
   });
 
-  const handleSubmit = (values, { resetForm }) => {
-    setAnnouncements([...announcements, values]);
-    resetForm();
+  useEffect(() => {
+    const fetchAssignments = async () => {
+      try {
+        const response = await fetch(`${apiBase}/api/assignment/assignments`);
+        const data = await response.json();
+        if (data.success) {
+          setAssignments(data.data);
+        } else {
+          console.error('Failed to fetch assignments');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchAssignments();
+  }, []);
+
+  const handleSubmit = async (values, { resetForm }) => {
+    setLoading(true);
+    setError('');
+    try {
+      const response = await fetch(`${apiBase}/api/assignment/create`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
+      const data = await response.json();
+      if (data.success) {
+        toast.success('Assignment created successfully!');
+        setAssignments([...assignments, data.data]);
+        resetForm();
+      } else {
+        setError(data.message);
+        toast.error(data.message);
+      }
+    } catch (e) {
+      setError('An error occurred. Please try again.');
+      toast.error('An error occurred. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="announcements-page">
       <Sidebar />
       <div className="main-content">
-        <h1 className='tittle'>Add Assignments</h1>
+        <h1 className='title'>Add Assignments</h1>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -44,57 +90,28 @@ const Assignment = () => {
                 <Field as="textarea" id="content" name="content" />
                 <ErrorMessage name="content" component="div" className="error" />
               </div>
-              <button type="submit" className="add-button" disabled={isSubmitting}>
-                Add Assignment
+              <button type="submit" className="add-button" disabled={loading}>
+                {loading ? 'Please wait...' : 'Add Assignment'}
               </button>
+              {error && <p className="error">{error}</p>}
             </Form>
           )}
         </Formik>
-        <h1 className='tittle'>Assignments</h1>
+        <h1 className='title'>Assignments</h1>
         <div className="announcements-list">
-         
-          <div className="announcement-card">
-            <h3>Sample Announcement Title</h3>
-            <p>This is the content of the sample announcement. You can edit or delete this announcement.</p>
-            <div className="butonsssss">
-            <button className="edit-button">Edit</button>
-            <button className="delete-button">Delete</button>
-            </div>
-          </div>
-          <div className="announcement-card">
-            <h3>Sample Announcement Title</h3>
-            <p>This is the content of the sample announcement. You can edit or delete this announcement.</p>
-            <div className="butonsssss">
-            <button className="edit-button">Edit</button>
-            <button className="delete-button">Delete</button>
-            </div>
-          </div>
-          <div className="announcement-card">
-            <h3>Sample Announcement Title</h3>
-            <p>This is the content of the sample announcement. You can edit or delete this announcement.</p>
-            <div className="butonsssss">
-            <button className="edit-button">Edit</button>
-            <button className="delete-button">Delete</button>
-            </div>
-          </div>
-          <div className="announcement-card">
-            <h3>Sample Announcement Title</h3>
-            <p>This is the content of the sample announcement. You can edit or delete this announcement.</p>
-            <div className="butonsssss">
-            <button className="edit-button">Edit</button>
-            <button className="delete-button">Delete</button>
-            </div>
-          </div>
-          {announcements.map((announcement, index) => (
+          {assignments.map((assignment, index) => (
             <div key={index} className="announcement-card">
-              <h3>{announcement.title}</h3>
-              <p>{announcement.content}</p>
-              <button className="edit-button">Edit</button>
-              <button className="delete-button">Delete</button>
+              <h3>{assignment.title}</h3>
+              <p>{assignment.content}</p>
+              <div className="butonsssss">
+                <button className="edit-button">Edit</button>
+                <button className="delete-button">Delete</button>
+              </div>
             </div>
           ))}
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
