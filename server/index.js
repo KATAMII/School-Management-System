@@ -3,6 +3,8 @@ import { config } from "dotenv";
 import cookieParser from "cookie-parser";
 import usersRouter from "./routes/users.route.js"
 import studentsRouter from "./routes/students.routes.js"
+import teachersRouter from "./routes/teachers.routes.js"
+
 import cors from "cors";
 
 config();
@@ -20,6 +22,8 @@ app.use(express.json());
 app.use(cookieParser()); 
 app.use("/api/admin", usersRouter);
 app.use("/api/student", studentsRouter);
+app.use("/api/teacher", teachersRouter);
+
 
 
 

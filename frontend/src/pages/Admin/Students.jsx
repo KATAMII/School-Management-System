@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState ,useEffect} from 'react';
 import Sidebar from './Sidebar';
 import './students.css';
 import { apiBase } from '../../../utils/config';
@@ -7,27 +7,17 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
 const Students = () => {
-  // State to store the list of students
   const [students, setStudents] = useState([]);
-  
-  // State to manage form data
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
-    class: '',
+    studentclass: '',
   });
-  
-  // State to manage loading state
   const [loading, setLoading] = useState(false);
-  
-  // State to manage error messages
   const [error, setError] = useState('');
   
-  // useNavigate hook from react-router-dom to navigate programmatically
-  const navigate = useNavigate();
-
-  // Fetch the list of students when the component mounts
   useEffect(() => {
     const fetchStudents = async () => {
       try {
@@ -46,7 +36,6 @@ const Students = () => {
     fetchStudents();
   }, []);
 
-  // Handle input changes in the form
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -55,7 +44,6 @@ const Students = () => {
     });
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -72,16 +60,12 @@ const Students = () => {
       if (data.success) {
         toast.success('Student registered successfully!');
         
-        const response = await fetch(`${apiBase}/api/students`);
-        const data = await response.json();
-        setStudents(data.data);
-        
-       
+        setStudents([...students, formData]);
         setFormData({
           name: '',
           email: '',
           password: '',
-          class: '',
+          studentclass: '',
         });
       } else {
         setError(data.message);
@@ -100,7 +84,6 @@ const Students = () => {
       <Sidebar />
       <div className="main-content">
         <h2 className='title'>Register Students</h2>
-        
         <form className="student-form" onSubmit={handleSubmit}>
           <div className="form-control">
             <label htmlFor="name">Name</label>
@@ -128,9 +111,9 @@ const Students = () => {
             <label htmlFor="class">Class</label>
             <input
               type="text"
-              id="class"
-              name="class"
-              value={formData.class}
+              id="studentclass"
+              name="studentclass"
+              value={formData.studentclass}
               onChange={handleChange}
               required
             />
@@ -152,13 +135,12 @@ const Students = () => {
           {error && <p className="error">{error}</p>}
         </form>
         <h2 className='title'>Registered Students</h2>
-        
         <div className="students-list">
           {students.map((student, index) => (
             <div key={index} className="student-card">
               <h3>{student.name}</h3>
               <p>Email: {student.email}</p>
-              <p>Class: {student.class}</p>
+              <p>Class: {student.studentclass}</p>
               <button className="delete-button">Delete</button>
             </div>
           ))}

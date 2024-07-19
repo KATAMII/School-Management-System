@@ -1,16 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect} from 'react';
 import Sidebar from './Sidebar';
 import './Teachers.css';
+import { apiBase } from '../../../utils/config';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 const Teachers = () => {
   const [students, setStudents] = useState([]);
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
-    class: '',
+    teachersclass: '',
+    subject:'',
   });
+  
+  
+  const [loading, setLoading] = useState(false);
+  
+ 
+  const [error, setError] = useState('');
+  
+  
+  const navigate = useNavigate();
 
+  
+  useEffect(() => {
+    const fetchStudents = async () => {
+      try {
+        const response = await fetch(`${apiBase}/api/teacher/teachers`);
+        const data = await response.json();
+        if (data.success) {
+          setStudents(data.data);
+        } else {
+          console.error('Failed to fetch students');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchStudents();
+  }, []);
+
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -19,16 +54,44 @@ const Teachers = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+ 
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setStudents([...students, formData]);
-    setFormData({
-      name: '',
-      email: '',
-      password: '',
-      class: '',
-    });
+    setLoading(true);
+    setError('');
+    try {
+      const response = await fetch(`${apiBase}/api/teacher/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await response.json();
+      if (data.success) {
+        toast.success('Teacher registered successfully!');
+        
+        setStudents(data.data);
+      
+        setFormData({
+          name: '',
+          email: '',
+          password: '',
+          teachersclass: '',
+          subject,
+        });
+      } else {
+        setError(data.message);
+        toast.error(data.message);
+      }
+    } catch (e) {
+      setError('An error occurred. Please try again.');
+      toast.error('An error occurred. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
+
 
   return (
     <div className="students-page">
@@ -63,9 +126,9 @@ const Teachers = () => {
             <label htmlFor="class">Class</label>
             <input
               type="text"
-              id="class"
-              name="class"
-              value={formData.class}
+              id="teachersclass"
+              name="teachersclass"
+              value={formData.teachersclass}
               onChange={handleChange}
               required
             />
@@ -74,9 +137,9 @@ const Teachers = () => {
             <label htmlFor="class">Subject</label>
             <input
               type="text"
-              id="class"
-              name="class"
-              value={formData.class}
+              id="subject"
+              name="subject"
+              value={formData.subject}
               onChange={handleChange}
               required
             />
@@ -92,51 +155,23 @@ const Teachers = () => {
               required
             />
           </div>
-          <button type="submit" className="register-button">Register Student</button>
+          <button type="submit" className="register-button" disabled={loading}>
+            {loading ? 'Please wait...' : 'Register Teacher'}
+          </button>
+          {error && <p className="error">{error}</p>}
         </form>
         <h2 className='title'>Registered Teachers</h2>
         <div className="students-list">
-          <div className="student-card">
-            <h3>John Doe</h3>
-            <p>Email: johndoe@example.com</p>
-            <p>Class: 10A</p>
-            <p>Subject: Mathematics</p>
-            <button className="delete-button">Delete</button>
-          </div>
-          <div className="student-card">
-            <h3>John Doe</h3>
-            <p>Email: johndoe@example.com</p>
-            <p>Class: 10A</p>
-            <p>Subject: Mathematics</p>
-            <button className="delete-button">Delete</button>
-          </div>
-          <div className="student-card">
-            <h3>John Doe</h3>
-            <p>Email: johndoe@example.com</p>
-            <p>Class: 10A</p>
-            <button className="delete-button">Delete</button>
-          </div>
-          <div className="student-card">
-            <h3>John Doe</h3>
-            <p>Email: johndoe@example.com</p>
-            <p>Class: 10A</p>
-          </div>
-          <div className="student-card">
-            <h3>John Doe</h3>
-            <p>Email: johndoe@example.com</p>
-            <p>Class: 10A</p>
-          </div>
-          <div className="student-card">
-            <h3>John Doe</h3>
-            <p>Email: johndoe@example.com</p>
-            <p>Class: 10A</p>
-          </div>
-          <div className="student-card">
-            <h3>John Doe</h3>
-            <p>Email: johndoe@example.com</p>
-            <p>Class: 10A</p>
-          </div>
-        
+          {students.map((student, index) => (
+            <div key={index} className="student-card">
+              <h3>{student.name}</h3>
+              <p>Email: {student.email}</p>
+              <p>Class: {student.teachersclass}</p>
+              <p>subject: {student.subject}</p>
+
+              <button className="delete-button">Delete</button>
+            </div>
+          ))}
         </div>
       </div>
     </div>

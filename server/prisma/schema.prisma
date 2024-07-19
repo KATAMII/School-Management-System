@@ -27,10 +27,24 @@ model student{
   id String @id @default(uuid())
   name String
   email String @unique
+  studentclass String 
   password String
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
   
 
   @@map("students_table")
+}
+model teacher {
+  id String @id @default(uuid())
+  name String
+  email String @unique
+  teachersclass String
+  subject String
+  password String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  
+
+  @@map("teachers_table")
 }

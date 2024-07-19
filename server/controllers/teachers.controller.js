@@ -4,32 +4,33 @@ import jwt from "jsonwebtoken";
 
 const prisma = new PrismaClient();
 
-export const createStudent = async (req, res) => {
+export const createTeacher = async (req, res) => {
   try {
-    const { name, email, password,studentclass } = req.body;
+    const { name, email, password ,teachersclass,subject} = req.body;
 
     const hashpassword = bcrypt.hashSync(password, 10);
-    const newstudent = await prisma.student.create({
+    const newstudent = await prisma.teacher.create({
       data: {
         name,
         email,
         password: hashpassword,
-        studentclass,
-        
+        teachersclass,
+        subject,
+      
         
       },
     });
-    res.status(201).json({ success: true, message: "student registered successfully" });
+    res.status(201).json({ success: true, message: "Teacher registered successfully" });
   } catch (e) {
     console.log(e.message);
     res.status(500).json({ success: false, message: "An error occurred in the server" });
   }
 };
 
-export const loginStudent = async (req, res) => {
+export const loginTeacher = async (req, res) => {
   const { email, password } = req.body;
   try {
-    const user = await prisma.student.findFirst({
+    const user = await prisma.teacher.findFirst({
       where: { email },
     });
 
@@ -58,9 +59,9 @@ export const loginStudent = async (req, res) => {
     return res.status(500).json({ success: false, message: e.message });
   }
 };
-export const getStudents = async (req, res) => {
+export const getTeachers = async (req, res) => {
     try {
-      const students = await prisma.student.findMany();
+      const students = await prisma.teacher.findMany();
       res.status(200).json({ success: true, data: students });
     } catch (error) {
       res.status(500).json({ success: false, message: 'Error fetching students' });
