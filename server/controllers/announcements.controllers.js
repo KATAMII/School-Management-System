@@ -2,11 +2,11 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export const createAssignment = async (req, res) => {
+export const createAnnouncements = async (req, res) => {
   const { title, content } = req.body;
 
   try {
-    const newAssignment = await prisma.assignments.create({
+    const newAssignment = await prisma.announcements.create({
       data: {
         title,
         content,
@@ -19,9 +19,9 @@ export const createAssignment = async (req, res) => {
   }
 };
 
-export const getAssignments = async (req, res) => {
+export const getAnnouncements = async (req, res) => {
   try {
-    const assignments = await prisma.assignments.findMany();
+    const assignments = await prisma.announcements.findMany();
     res.status(200).json({ success: true, data: assignments });
   } catch (error) {
     console.error(error.message);

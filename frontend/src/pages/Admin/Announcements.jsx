@@ -25,7 +25,7 @@ const Announcements = () => {
   useEffect(() => {
     const fetchAnnouncements = async () => {
       try {
-        const response = await fetch(`${apiBase}/api/announcements`);
+        const response = await fetch(`${apiBase}/api/announcement/announcements`);
         const data = await response.json();
         if (data.success) {
           setAnnouncements(data.data);
@@ -44,7 +44,7 @@ const Announcements = () => {
     setLoading(true);
     setError('');
     try {
-      const response = await fetch(`${apiBase}/api/announcements`, {
+      const response = await fetch(`${apiBase}/api/announcement/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

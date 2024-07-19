@@ -5,6 +5,7 @@ import usersRouter from "./routes/users.route.js"
 import studentsRouter from "./routes/students.routes.js"
 import teachersRouter from "./routes/teachers.routes.js"
 import assignmentsRouter from "./routes/assignments.routes.js"
+import announcementsRouter from "./routes/announcements.routes.js"
 
 
 
@@ -27,6 +28,7 @@ app.use("/api/admin", usersRouter);
 app.use("/api/student", studentsRouter);
 app.use("/api/teacher", teachersRouter);
 app.use("/api/assignment", assignmentsRouter);
+app.use("/api/announcement", announcementsRouter);
 
 
 
