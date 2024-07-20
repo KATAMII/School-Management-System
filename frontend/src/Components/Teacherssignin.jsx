@@ -27,11 +27,11 @@ const Teachersignin = () => {
       });
       const data = await response.json();
       if (data.success) {
-        document.cookie = `student_access_token=${data.token}; path=/`;
+        document.cookie = `teacher_access_token=${data.token}; path=/`;
         localStorage.setItem('user_id', data.data.id);
         setIsLoggedIn(true);
         navigate('/teacher/dashboard');
-        toast.success('Student logged in successfully!');
+        toast.success('Teacher logged in successfully!');
       } else {
         toast.error(data.message);
       }

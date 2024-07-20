@@ -1,0 +1,60 @@
+.enter-grades-page {
+    display: flex;
+  }
+  
+  .main-content {
+    margin-left: 250px;
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .grade-form {
+    background: rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    width: 40rem;
+    color: white;
+  }
+  
+  .grade-form .form-control {
+    margin-bottom: 15px;
+  }
+  
+  .grade-form .form-control label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .grade-form .form-control input,
+  .grade-form .form-control select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .grade-form .submit-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+  }
+  
+  .grade-form .submit-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .error {
+    color: red;
+    margin-top: 10px;
+  }
+  
