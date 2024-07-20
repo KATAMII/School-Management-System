@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import './classes.css';
+import { apiBase } from '../../../utils/config'; 
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Classes = () => {
   const [classes, setClasses] = useState([]);
@@ -8,6 +11,26 @@ const Classes = () => {
     className: '',
     classTeacher: '',
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const fetchClasses = async () => {
+      try {
+        const response = await fetch(`${apiBase}/api/class/classes`);
+        const data = await response.json();
+        if (data.success) {
+          setClasses(data.data);
+        } else {
+          console.error('Failed to fetch classes');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchClasses();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,13 +40,56 @@ const Classes = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setClasses([...classes, classData]);
-    setClassData({
-      className: '',
-      classTeacher: '',
-    });
+    setLoading(true);
+    setError('');
+    try {
+      const response = await fetch(`${apiBase}/api/class/create`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(classData),
+      });
+      const data = await response.json();
+      if (data.success) {
+        toast.success('Class added successfully!');
+        setClasses([...classes, data.data]);
+        setClassData({
+          className: '',
+          classTeacher: '',
+        });
+      } else {
+        setError(data.message);
+        toast.error(data.message);
+      }
+    } catch (e) {
+      setError('An error occurred. Please try again.');
+      toast.error('An error occurred. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    console.log(`Deleting class with ID: ${id}`);
+    try {
+      const response = await fetch(`${apiBase}/api/class/delete/${id}`, {
+        method: 'DELETE',
+      });
+      const data = await response.json();
+      if (data.success) {
+        toast.success('Class deleted successfully!');
+        setClasses(classes.filter((classItem) => classItem.id !== id));
+      } else {
+        toast.error('Failed to delete class');
+        console.error('Failed to delete class:', data.message);
+      }
+    } catch (error) {
+      toast.error('An error occurred. Please try again.');
+      console.error('Error:', error);
+    }
   };
 
   return (
@@ -54,40 +120,27 @@ const Classes = () => {
               required
             />
           </div>
-          <button type="submit" className="add-button">Add Class</button>
+          <button type="submit" className="add-button" disabled={loading}>
+            {loading ? 'Please wait...' : 'Add Class'}
+          </button>
+          {error && <p className="error">{error}</p>}
         </form>
         <div className="classes-list">
-          
-          <div className="class-card">
-            <h3>Class 10A</h3>
-            <p>Teacher: Mr. John Doe</p>
-            <button className="delete-button">Delete</button>
-          </div>
-          <div className="class-card">
-            <h3>Class 10A</h3>
-            <p>Teacher: Mr. John Doe</p>
-            <button className="delete-button">Delete</button>
-          </div>
-          <div className="class-card">
-            <h3>Class 10A</h3>
-            <p>Teacher: Mr. John Doe</p>
-            <button className="delete-button">Delete</button>
-          </div>
-          <div className="class-card">
-            <h3>Class 10A</h3>
-            <p>Teacher: Mr. John Doe</p>
-            <button className="delete-button">Delete</button>
-          </div>
-          
-          {classes.map((classItem, index) => (
-            <div key={index} className="class-card">
+          {classes.map((classItem) => (
+            <div key={classItem.id} className="class-card">
               <h3>{classItem.className}</h3>
               <p>Teacher: {classItem.classTeacher}</p>
-             <button className="delete-button">Delete</button>
+              <button
+                className="delete-button"
+                onClick={() => handleDelete(classItem.id)}
+              >
+                Delete
+              </button>
             </div>
           ))}
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

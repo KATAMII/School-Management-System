@@ -66,3 +66,11 @@ model Announcements {
 
   @@map("anouncements_table")
 }
+model Class {
+  id        String   @id @default(uuid())
+  className    String
+  classTeacher String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  @@map("classes_table")
+}

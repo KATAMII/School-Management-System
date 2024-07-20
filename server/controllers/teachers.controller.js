@@ -67,3 +67,12 @@ export const getTeachers = async (req, res) => {
       res.status(500).json({ success: false, message: 'Error fetching students' });
     }
   };
+
+  export const getTeachersCount = async (req, res) => {
+    try {
+      const count = await prisma.teacher.count();
+      res.json({ count });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };

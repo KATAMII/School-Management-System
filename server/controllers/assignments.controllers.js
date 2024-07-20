@@ -28,3 +28,11 @@ export const getAssignments = async (req, res) => {
     res.status(500).json({ success: false, message: 'Failed to fetch assignments' });
   }
 };
+export const getAssignmentsCount = async (req, res) => {
+  try {
+    const count = await prisma.assignments.count();
+    res.json({ count });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
