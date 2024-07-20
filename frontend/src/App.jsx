@@ -23,6 +23,7 @@ import TeacherStudents  from './pages/Teacher/Students'
 import Teachersview  from './pages/Teacher/Teachers'
 import TeacherAnnouncements  from './pages/Teacher/Announcements'
 import TeacherAssignment  from './pages/Teacher/Assignments'
+import Classesview  from './pages/Teacher/classes'
 
 function App() {
   
@@ -51,6 +52,7 @@ function App() {
         <Route path='/teacher/teachers' element={<Teachersview/>}/>
         <Route path='/teacher/announcements' element={<TeacherAnnouncements/>}/>
         <Route path='/teacher/assignment' element={<TeacherAssignment />}/>
+        <Route path='/teacher/classes' element={<Classesview />}/>
 
       </Routes>
     </Router>
