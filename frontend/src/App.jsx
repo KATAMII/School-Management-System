@@ -18,6 +18,12 @@ import Students from './pages/Admin/Students'
 import Teachers from './pages/Admin/Teachers'
 import StudentDashboard from './pages/Student/Dashboard'
 import TeacherDashboard from './pages/Teacher/Dashboard'
+import TeacherSidebar from './pages/Teacher/sidebar'
+import TeacherStudents  from './pages/Teacher/Students'
+import Teachersview  from './pages/Teacher/Teachers'
+import TeacherAnnouncements  from './pages/Teacher/Announcements'
+import TeacherAssignment  from './pages/Teacher/Assignments'
+
 function App() {
   
 
@@ -40,6 +46,12 @@ function App() {
         <Route path='/admin/announcements' element={<Announcements/>}/>
         <Route path='/student/dashboard' element={<StudentDashboard/>}/>
         <Route path='/teacher/dashboard' element={<TeacherDashboard/>}/>
+        <Route path='/teacher/sidebar' element={<TeacherSidebar/>}/>
+        <Route path='/teacher/students' element={<TeacherStudents/>}/>
+        <Route path='/teacher/teachers' element={<Teachersview/>}/>
+        <Route path='/teacher/announcements' element={<TeacherAnnouncements/>}/>
+        <Route path='/teacher/assignment' element={<TeacherAssignment />}/>
+
       </Routes>
     </Router>
     </AuthProvider>

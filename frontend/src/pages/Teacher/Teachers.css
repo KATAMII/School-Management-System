@@ -1,4 +1,4 @@
-.students-page {
+.teachers-page {
     display: flex;
   }
   
@@ -13,14 +13,14 @@
     text-align: center;
   }
   
-  .students-list {
+  .teachers-list {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: space-around;
   }
   
-  .student-card {
+  .teacher-card {
     background: white;
     padding: 15px;
     border-radius: 5px;
@@ -31,12 +31,12 @@
     width: 300px; 
   }
   
-  .student-card h3 {
+  .teacher-card h3 {
     margin: 0 0 10px 0;
     color: #007bff;
   }
   
-  .student-card p {
+  .teacher-card p {
     margin: 5px 0;
     color: #333;
   }
