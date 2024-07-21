@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 export const createStudent = async (req, res) => {
   try {
-    const { name, email, password,studentclass } = req.body;
+    const { name, email, password,studentclass,teacherId   } = req.body;
 
     const hashpassword = bcrypt.hashSync(password, 10);
     const newstudent = await prisma.student.create({
@@ -15,6 +15,7 @@ export const createStudent = async (req, res) => {
         email,
         password: hashpassword,
         studentclass,
+        teacherId  ,
         
         
       },

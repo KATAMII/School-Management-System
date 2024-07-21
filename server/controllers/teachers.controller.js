@@ -85,16 +85,16 @@ export const getAllStudents = async (req, res) => {
 };
 
 export const getStudentsByTeacher = async (req, res) => {
-  const teacherId = req.user.id;
-
+  const teacherId = req.user.id; 
   try {
     const students = await prisma.student.findMany({
-      where: { teacherId },
+      where: { teacherId: teacherId },
     });
-
     res.json({ students });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    if (!res.headersSent) {
+      res.status(500).json({ message: error.message });
+    }
   }
 };
 

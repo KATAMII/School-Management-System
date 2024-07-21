@@ -14,10 +14,19 @@ const Students = () => {
     email: '',
     password: '',
     studentclass: '',
+    teacherId: '' 
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  
+
+ 
+  const getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+  };
+
   useEffect(() => {
     const fetchStudents = async () => {
       try {
@@ -34,6 +43,19 @@ const Students = () => {
     };
 
     fetchStudents();
+  }, []);
+
+  useEffect(() => {
+    
+    const token = getCookie('teacher_access_token');
+    if (token) {
+      const parsedToken = JSON.parse(atob(token.split('.')[1]));
+      const teacherId = parsedToken.id; 
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        teacherId
+      }));
+    }
   }, []);
 
   const handleChange = (e) => {
@@ -59,13 +81,13 @@ const Students = () => {
       const data = await response.json();
       if (data.success) {
         toast.success('Student registered successfully!');
-        
         setStudents([...students, formData]);
         setFormData({
           name: '',
           email: '',
           password: '',
           studentclass: '',
+          teacherId: '' 
         });
       } else {
         setError(data.message);

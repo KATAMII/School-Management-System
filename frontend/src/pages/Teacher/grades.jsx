@@ -15,24 +15,41 @@ const EnterGrades = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  const getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+  };
+
   useEffect(() => {
     const fetchStudents = async () => {
+      const token = getCookie('teacher_access_token');
+      console.log('Read cookie:', token); 
+      if (!token) {
+        setError('No token found');
+        console.error('No token found');
+        return;
+      }
+
       try {
         const response = await fetch(`${apiBase}/api/teacher/students`, {
-          method: 'GET',
-          credentials: 'include',  
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+          credentials: 'include', 
         });
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.message || 'Failed to fetch students');
-        }
-
         const data = await response.json();
-        setStudents(data.students);
+        console.log('Fetched students:', data); 
+        if (response.ok) {
+          setStudents(data.students);
+        } else {
+          console.error('Failed to fetch students:', data.message);
+          setError(data.message);
+        }
       } catch (error) {
+        console.error('Error fetching students:', error);
         setError(error.message);
-        console.error('Error:', error);
       }
     };
 
@@ -43,7 +60,7 @@ const EnterGrades = () => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: name === 'marks' ? parseInt(value) : value,
     });
   };
 
@@ -51,31 +68,38 @@ const EnterGrades = () => {
     e.preventDefault();
     setLoading(true);
     setError('');
+    const token = getCookie('teacher_access_token');
+    if (!token) {
+      setError('No token found');
+      console.error('No token found');
+      return;
+    }
+
     try {
       const response = await fetch(`${apiBase}/api/teacher/grades`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         },
-        credentials: 'include',  
+        credentials: 'include', 
         body: JSON.stringify(formData),
       });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to submit grade');
-      }
-
       const data = await response.json();
-      toast.success('Grade submitted successfully!');
-      setFormData({
-        studentId: '',
-        subject: '',
-        marks: '',
-      });
+      if (response.ok) {
+        toast.success('Grade submitted successfully!');
+        setFormData({
+          studentId: '',
+          subject: '',
+          marks: '',
+        });
+      } else {
+        setError(data.message);
+        toast.error(data.message);
+      }
     } catch (e) {
-      setError(e.message);
-      toast.error(e.message);
+      setError('An error occurred. Please try again.');
+      toast.error('An error occurred. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -97,11 +121,17 @@ const EnterGrades = () => {
               required
             >
               <option value="">Select a student</option>
-              {students.map((student) => (
-                <option key={student.id} value={student.id}>
-                  {student.name}
+              {students.length > 0 ? (
+                students.map((student) => (
+                  <option key={student.id} value={student.id}>
+                    {student.name}
+                  </option>
+                ))
+              ) : (
+                <option value="" disabled>
+                  No students available
                 </option>
-              ))}
+              )}
             </select>
           </div>
           <div className="form-control">
@@ -119,7 +149,7 @@ const EnterGrades = () => {
             <label htmlFor="marks">Marks</label>
             <input
               type="number"
-              id="marks"
+              id="marks" 
               name="marks"
               value={formData.marks}
               onChange={handleChange}
