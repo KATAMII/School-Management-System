@@ -29,7 +29,7 @@ model student {
   grades       grade[]  @relation("StudentGrades")
   createdAt    DateTime @default(now())
   updatedAt    DateTime @default(now()) @updatedAt
-
+  submittedAssignments SubmittedAssignment[]
   @@map("students_table")
 }
 
@@ -91,3 +91,16 @@ model Class {
 
   @@map("classes_table")
 }
+model SubmittedAssignment {
+  id          String   @id @default(uuid())
+  title       String
+  content     String
+  fileUrl     String
+  studentId   String?
+  student     student?  @relation(fields: [studentId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
+
+  @@map("submitted_assignments_table")
+}
+

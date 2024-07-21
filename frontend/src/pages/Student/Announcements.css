@@ -1,0 +1,43 @@
+.announcements-page {
+    display: flex;
+  }
+  
+  .main-content {
+    margin-left: 250px;
+    padding: 20px;
+  }
+  
+  h1 {
+    color: #333;
+    font-size: 2rem;
+  }
+  
+  .announcements-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+    width: 90rem;
+  }
+  
+  .announcement-card {
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: -1px 10px 5px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: -1px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px 10px 5px 0px rgba(0,0,0,0.75);
+    width: calc(33.333% - 20px);
+  }
+  
+  .announcement-card h3 {
+    margin: 0 0 10px 0;
+    color: #007bff;
+    font-size: 1.7rem;
+  }
+  
+  .announcement-card p {
+    margin: 5px 0;
+    color: #333;
+    font-size: 1.4rem;
+  }

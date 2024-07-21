@@ -1,0 +1,89 @@
+.assignments-page {
+    display: flex;
+  }
+  
+  .main-content {
+    margin-left: 250px;
+    padding: 20px;
+  }
+  
+  h1 {
+    color: #333;
+    font-size: 2rem;
+  }
+  
+  .assignment-form {
+    background: #f4f4f4;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    width: 40rem;
+  }
+  
+  .assignment-form .form-control {
+    margin-bottom: 15px;
+  }
+  
+  .assignment-form .form-control label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .assignment-form .form-control input,
+  .assignment-form .form-control textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.5rem;
+  }
+  
+  .assignment-form .submit-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+  }
+  
+  .assignment-form .submit-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .assignments-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+    width: 90rem;
+    margin-bottom:3rem;
+  }
+  
+  .assignment-card {
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: -1px 10px 5px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: -1px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px 10px 5px 0px rgba(0,0,0,0.75);
+    width: calc(33.333% - 20px);
+  }
+  
+  .assignment-card h3 {
+    margin: 0 0 10px 0;
+    color: #007bff;
+    font-size: 1.7rem;
+  }
+  
+  .assignment-card p {
+    margin: 5px 0;
+    color: #333;
+    font-size: 1.4rem;
+  }
+  
+  .error {
+    color: red;
+  }
+  
