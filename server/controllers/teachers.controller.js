@@ -99,7 +99,7 @@ export const getStudentsByTeacher = async (req, res) => {
 };
 
 export const submitGrade = async (req, res) => {
-  const { studentId, subject, marks } = req.body;
+  const { studentId, subject, marks ,studentname} = req.body;
 
   try {
     const grade = await prisma.grade.create({
@@ -124,6 +124,21 @@ export const getGradesByStudent = async (req, res) => {
       where: { studentId },
     });
 
+    res.json({ grades });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const getGradesByTeacher = async (req, res) => {
+  const teacherId = req.user.id; 
+  try {
+    const grades = await prisma.grade.findMany({
+      where: { teacherId },
+      include: {
+        student: true, 
+      },
+    });
     res.json({ grades });
   } catch (error) {
     res.status(500).json({ message: error.message });
