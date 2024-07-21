@@ -25,6 +25,7 @@ import TeacherAnnouncements  from './pages/Teacher/Announcements'
 import TeacherAssignment  from './pages/Teacher/Assignments'
 import Classesview  from './pages/Teacher/classes'
 import EnterGrades  from './pages/Teacher/grades'
+import StudentTeachersview  from './pages/Student/Teachers'
 
 function App() {
   
@@ -55,6 +56,8 @@ function App() {
         <Route path='/teacher/assignment' element={<TeacherAssignment />}/>
         <Route path='/teacher/classes' element={<Classesview />}/>
         <Route path='/teacher/grades' element={<EnterGrades/>}/>
+        <Route path='/student/teachers' element={<StudentTeachersview/>}/>
+
 
       </Routes>
     </Router>

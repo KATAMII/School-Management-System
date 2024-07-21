@@ -12,16 +12,19 @@ const Sidebar = () => {
             <NavLink to="/student/students" className={({ isActive }) => (isActive ? 'active-link' : '')}>Students</NavLink>
           </li>
           <li>
-            <NavLink to="/admin/teachers" className={({ isActive }) => (isActive ? 'active-link' : '')}>Teachers</NavLink>
+            <NavLink to="/student/teachers" className={({ isActive }) => (isActive ? 'active-link' : '')}>Teachers</NavLink>
           </li>
           <li>
-            <NavLink to="/admin/announcements" className={({ isActive }) => (isActive ? 'active-link' : '')}>Announcements</NavLink>
+            <NavLink to="/student/announcements" className={({ isActive }) => (isActive ? 'active-link' : '')}>Announcements</NavLink>
           </li>
           <li>
-            <NavLink to="/admin/assignment" className={({ isActive }) => (isActive ? 'active-link' : '')}>Assignments</NavLink>
+            <NavLink to="/student/assignment" className={({ isActive }) => (isActive ? 'active-link' : '')}>Assignments</NavLink>
           </li>
           <li>
-            <NavLink to="/admin/classes" className={({ isActive }) => (isActive ? 'active-link' : '')}>Classes</NavLink>
+            <NavLink to="/student/classes" className={({ isActive }) => (isActive ? 'active-link' : '')}>Classes</NavLink>
+          </li>
+          <li>
+            <NavLink to="/student/grades" className={({ isActive }) => (isActive ? 'active-link' : '')}>grades</NavLink>
           </li>
         </ul>
       </nav>
