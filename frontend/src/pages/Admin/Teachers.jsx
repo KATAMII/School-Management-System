@@ -1,4 +1,4 @@
-import React, { useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import './Teachers.css';
 import { apiBase } from '../../../utils/config';
@@ -8,25 +8,17 @@ import { useNavigate } from 'react-router-dom';
 
 const Teachers = () => {
   const [students, setStudents] = useState([]);
-  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     teachersclass: '',
-    subject:'',
+    subject: '',
   });
-  
-  
   const [loading, setLoading] = useState(false);
-  
- 
   const [error, setError] = useState('');
-  
-  
   const navigate = useNavigate();
 
-  
   useEffect(() => {
     const fetchStudents = async () => {
       try {
@@ -45,7 +37,6 @@ const Teachers = () => {
     fetchStudents();
   }, []);
 
-  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -54,7 +45,6 @@ const Teachers = () => {
     });
   };
 
- 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -70,15 +60,13 @@ const Teachers = () => {
       const data = await response.json();
       if (data.success) {
         toast.success('Teacher registered successfully!');
-        
-        setStudents(data.data);
-      
+        setStudents([...students, data.data]);
         setFormData({
           name: '',
           email: '',
           password: '',
           teachersclass: '',
-          subject,
+          subject: '',
         });
       } else {
         setError(data.message);
@@ -92,12 +80,31 @@ const Teachers = () => {
     }
   };
 
+  const handleDelete = async (id) => {
+    console.log(`Deleting teacher with ID: ${id}`);
+    try {
+      const response = await fetch(`${apiBase}/api/teacher/delete/${id}`, {
+        method: 'DELETE',
+      });
+      const data = await response.json();
+      if (data.success) {
+        toast.success('Teacher deleted successfully!');
+        setStudents(students.filter((student) => student.id !== id));
+      } else {
+        toast.error('Failed to delete teacher');
+        console.error('Failed to delete teacher:', data.message);
+      }
+    } catch (error) {
+      toast.error('An error occurred. Please try again.');
+      console.error('Error:', error);
+    }
+  };
 
   return (
     <div className="students-page">
       <Sidebar />
       <div className="main-content">
-      <h2 className='title'>Register Teachers</h2>
+        <h2 className="title">Register Teachers</h2>
         <form className="student-form" onSubmit={handleSubmit}>
           <div className="form-control">
             <label htmlFor="name">Name</label>
@@ -121,7 +128,6 @@ const Teachers = () => {
               required
             />
           </div>
-      
           <div className="form-control">
             <label htmlFor="class">Class</label>
             <input
@@ -160,19 +166,22 @@ const Teachers = () => {
           </button>
           {error && <p className="error">{error}</p>}
         </form>
-        <h2 className='title'>Registered Teachers</h2>
-        <div className="students-list">
-          {students.map((student, index) => (
-            <div key={index} className="student-card">
-              <h3>{student.name}</h3>
-              <p>Email: {student.email}</p>
-              <p>Class: {student.teachersclass}</p>
-              <p>subject: {student.subject}</p>
-
-              <button className="delete-button">Delete</button>
-            </div>
-          ))}
-        </div>
+        <h2 className="title">Registered Teachers</h2>
+        {loading ? 'loading registered teachers':
+         <div className="students-list">
+         {students.map((student, index) => (
+           <div key={index} className="student-card">
+             <h3>{student.name}</h3>
+             <p>Email: {student.email}</p>
+             <p>Class: {student.teachersclass}</p>
+             <p>Subject: {student.subject}</p>
+             <button className="delete-button" onClick={() => handleDelete(student.id)}>Delete</button>
+           </div>
+         ))}
+       </div>
+        }
+       
+        <ToastContainer />
       </div>
     </div>
   );

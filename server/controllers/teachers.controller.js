@@ -158,3 +158,15 @@ export const getGradesForLoggedInStudent = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const deleteteacher= async (req, res) => {
+  const { id } = req.params;
+  try {
+    await prisma.teacher.delete({
+      where: { id: id }, 
+    });
+    res.json({ success: true });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};

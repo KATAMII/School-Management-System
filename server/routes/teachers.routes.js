@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createTeacher, loginTeacher, getTeachers, getTeachersCount, getAllStudents, getStudentsByTeacher, submitGrade, getGradesByStudent,getGradesByTeacher,getGradesForLoggedInStudent} from "../controllers/teachers.controller.js";
+import { createTeacher, loginTeacher, getTeachers, getTeachersCount, getAllStudents, getStudentsByTeacher, submitGrade, getGradesByStudent,getGradesByTeacher,getGradesForLoggedInStudent,deleteteacher} from "../controllers/teachers.controller.js";
 import { validateInformation } from "../middlewares/teachers.middleware.js";
 import { authenticateToken } from "../middlewares/auth.middleware.js"; 
 
@@ -25,5 +25,6 @@ router.get('/teacher/grades', authenticateToken, (req, res, next) => {
   }, getGradesByTeacher);
 
 router.get('/student/grades', authenticateToken, getGradesForLoggedInStudent);
+router.delete('/delete/:id', deleteteacher);
 
 export default router;
