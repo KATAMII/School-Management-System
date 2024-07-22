@@ -40,3 +40,15 @@ export const deleteAnnouncement = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+export const updateAnnouncement = async (req, res) => {
+  const { id, title, content } = req.body;
+  try {
+    const updatedAnnouncement = await prisma.announcements.update({
+      where: { id: id },
+      data: { title, content },
+    });
+    res.json({ success: true, data: updatedAnnouncement });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};

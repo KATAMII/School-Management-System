@@ -11,6 +11,7 @@ const Assignment = () => {
   const [assignments, setAssignments] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [fetching, setFetching] = useState(false);
 
   const initialValues = {
     title: '',
@@ -24,6 +25,7 @@ const Assignment = () => {
 
   useEffect(() => {
     const fetchAssignments = async () => {
+      setFetching(true); 
       try {
         const response = await fetch(`${apiBase}/api/assignment/assignments`);
         const data = await response.json();
@@ -34,6 +36,8 @@ const Assignment = () => {
         }
       } catch (error) {
         console.error('Error:', error);
+      }finally{
+        setFetching(false);
       }
     };
 
@@ -98,7 +102,10 @@ const Assignment = () => {
           )}
         </Formik>
         <h1 className='title'>Assignments</h1>
-        <div className="announcements-list">
+        {fetching ? ( 
+          <div className="loading">Loading announcements...</div>
+        ) :
+        (<div className="announcements-list">
           {assignments.map((assignment, index) => (
             <div key={index} className="announcement-card">
               <h3>{assignment.title}</h3>
@@ -109,7 +116,7 @@ const Assignment = () => {
               </div>
             </div>
           ))}
-        </div>
+        </div>)}
       </div>
       <ToastContainer />
     </div>
