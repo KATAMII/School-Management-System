@@ -67,7 +67,26 @@ const Announcements = () => {
       setLoading(false);
     }
   };
-
+  
+  const handleDelete = async (id) => {
+    console.log(`Deleting teacher with ID: ${id}`);
+    try {
+      const response = await fetch(`${apiBase}/api/announcement/delete/${id}`, {
+        method: 'DELETE',
+      });
+      const data = await response.json();
+      if (data.success) {
+        toast.success('Teacher deleted successfully!');
+        setAnnouncements(announcements.filter((announcement) => announcement.id !== id));
+      } else {
+        toast.error('Failed to delete teacher');
+        console.error('Failed to delete teacher:', data.message);
+      }
+    } catch (error) {
+      toast.error('An error occurred. Please try again.');
+      console.error('Error:', error);
+    }
+  };
   return (
     <div className="announcements-page">
       <Sidebar />
@@ -105,7 +124,8 @@ const Announcements = () => {
               <p>{announcement.content}</p>
               <div className="butonsssss">
                 <button className="edit-button">Edit</button>
-                <button className="delete-button">Delete</button>
+                <button className="delete-button" onClick={() => handleDelete(announcement.id)}>Delete</button>
+
               </div>
             </div>
           ))}

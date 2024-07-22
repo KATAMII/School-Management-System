@@ -28,3 +28,15 @@ export const getAnnouncements = async (req, res) => {
     res.status(500).json({ success: false, message: 'Failed to fetch assignments' });
   }
 };
+
+export const deleteAnnouncement = async (req, res) => {
+  const { id } = req.params;
+  try {
+    await prisma.announcements.delete({
+      where: { id: id }, 
+    });
+    res.json({ success: true });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
