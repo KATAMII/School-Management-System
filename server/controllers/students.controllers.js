@@ -90,4 +90,16 @@ export const getStudents = async (req, res) => {
       res.status(500).json({ success: false, message: error.message });
     }
   };
+
+  export const deletestudent= async (req, res) => {
+    const { id } = req.params;
+    try {
+      await prisma.student.delete({
+        where: { id: id }, 
+      });
+      res.json({ success: true });
+    } catch (error) {
+      res.status(500).json({ success: false, message: error.message });
+    }
+  };
   
