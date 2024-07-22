@@ -1,8 +1,16 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useContext } from "react";
+import { NavLink ,useNavigate  } from 'react-router-dom';
 import './sidebar.css';
+import AuthContext from '../../../../server/Authentication/authentication'
 
 const TeacherSidebar = () => {
+  const { isLoggedIn, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();  
+    navigate('/ChooseUser');  
+  };
   return (
     <div className="sidebar">
       <h2>Dashboard</h2>
@@ -26,6 +34,7 @@ const TeacherSidebar = () => {
           <li>
             <NavLink to="/teacher/grades" className={({ isActive }) => (isActive ? 'active-link' : '')}>Enter Grades</NavLink>
           </li>
+          <button className="btnn" onClick={handleLogout}>Log Out</button>
         </ul>
       </nav>
     </div>
