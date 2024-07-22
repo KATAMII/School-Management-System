@@ -13,7 +13,7 @@ const TeacherSidebar = () => {
   };
   return (
     <div className="sidebar">
-      <h2>Dashboard</h2>
+      <h2>Teachers Dashboard</h2>
       <nav>
         <ul>
           <li>
