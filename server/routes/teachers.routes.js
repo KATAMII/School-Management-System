@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createTeacher, loginTeacher, getTeachers, getTeachersCount, getAllStudents, getStudentsByTeacher, submitGrade, getGradesByStudent,getGradesByTeacher} from "../controllers/teachers.controller.js";
+import { createTeacher, loginTeacher, getTeachers, getTeachersCount, getAllStudents, getStudentsByTeacher, submitGrade, getGradesByStudent,getGradesByTeacher,getGradesForLoggedInStudent} from "../controllers/teachers.controller.js";
 import { validateInformation } from "../middlewares/teachers.middleware.js";
 import { authenticateToken } from "../middlewares/auth.middleware.js"; 
 
@@ -18,8 +18,12 @@ router.get('/students', authenticateToken, (req, res, next) => {
     next();
   }, submitGrade);
 router.get('/grades/:studentId', authenticateToken, getGradesByStudent);
-export default router;
+
 router.get('/teacher/grades', authenticateToken, (req, res, next) => {
     console.log('Authenticated request for fetching grades:', req.user);
     next();
   }, getGradesByTeacher);
+
+router.get('/student/grades', authenticateToken, getGradesForLoggedInStudent);
+
+export default router;

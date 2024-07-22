@@ -30,6 +30,7 @@ import StudentStudents  from './pages/Student/Student'
 import StudentAnnouncements from './pages/Student/Announcements'
 import StudentAssignments from './pages/Student/Assignments'
 import StudentClassesview from './pages/Student/Classes'
+import ViewGrades from './pages/Student/Grades'
 
 function App() {
   
@@ -65,6 +66,7 @@ function App() {
         <Route path='/student/announcements' element={<StudentAnnouncements/>}/>
         <Route path='/student/assignment' element={<StudentAssignments/>}/>
         <Route path='/student/classes' element={<StudentClassesview/>}/>
+        <Route path='/student/grades' element={<ViewGrades/>}/>
 
 
       </Routes>

@@ -144,3 +144,17 @@ export const getGradesByTeacher = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const getGradesForLoggedInStudent = async (req, res) => {
+  const studentId = req.user.id;
+
+  try {
+    const grades = await prisma.grade.findMany({
+      where: { studentId },
+    });
+
+    res.json({ grades });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
