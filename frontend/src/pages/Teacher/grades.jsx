@@ -32,7 +32,7 @@ const EnterGrades = () => {
         console.error('No token found');
         return;
       }
-
+  
       try {
         const response = await fetch(`${apiBase}/api/teacher/students`, {
           headers: {
@@ -53,6 +53,7 @@ const EnterGrades = () => {
         setError(error.message);
       }
     };
+  
 
     const fetchGrades = async () => {
         const token = getCookie('teacher_access_token');

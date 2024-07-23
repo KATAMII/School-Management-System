@@ -90,6 +90,7 @@ export const getStudentsByTeacher = async (req, res) => {
     const students = await prisma.student.findMany({
       where: { teacherId: teacherId },
     });
+    console.log('Found students:', students);
     res.json({ students });
   } catch (error) {
     if (!res.headersSent) {
