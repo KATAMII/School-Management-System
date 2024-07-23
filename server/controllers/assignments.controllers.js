@@ -36,3 +36,26 @@ export const getAssignmentsCount = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+export const deleteAssignment = async (req, res) => {
+  const { id } = req.params;
+  try {
+    await prisma.assignments.delete({
+      where: { id: id }, 
+    });
+    res.json({ success: true });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+export const updateAssignment = async (req, res) => {
+  const { id, title, content } = req.body;
+  try {
+    const updatedAssignment  = await prisma.assignments.update({
+      where: { id: id },
+      data: { title, content },
+    });
+    res.json({ success: true, data: updatedAssignment });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};

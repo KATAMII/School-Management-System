@@ -12,6 +12,7 @@ const Assignment = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [fetching, setFetching] = useState(false);
+  const [editAssignment, setEditAssignment] = useState(null); 
 
   const initialValues = {
     title: '',
@@ -48,18 +49,24 @@ const Assignment = () => {
     setLoading(true);
     setError('');
     try {
-      const response = await fetch(`${apiBase}/api/assignment/create`, {
-        method: 'POST',
+      const response = await fetch(`${apiBase}/api/assignment/${editAssignment ? 'update' : 'create'}`, {
+        method: editAssignment ? 'PUT' : 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify({ ...values, id: editAssignment?.id }),
       });
       const data = await response.json();
       if (data.success) {
-        toast.success('Assignment created successfully!');
-        setAssignments([...assignments, data.data]);
+        if (editAssignment) {
+          setAssignments(assignments.map((assigment) => assigment.id === data.data.id ? data.data : assigment));
+          toast.success('Assignment updated successfully!');
+        } else {
+          setAssignments([...assignments, data.data]);
+          toast.success('Assignment created successfully!');
+        }
         resetForm();
+        setEditAssignment(null); 
       } else {
         setError(data.message);
         toast.error(data.message);
@@ -72,14 +79,39 @@ const Assignment = () => {
     }
   };
 
+  const handleDelete = async (id) => {
+    console.log(`Deleting assignment with ID: ${id}`);
+    try {
+      const response = await fetch(`${apiBase}/api/assignment/delete/${id}`, {
+        method: 'DELETE',
+      });
+      const data = await response.json();
+      if (data.success) {
+        toast.success('Assignment deleted successfully!');
+        setAssignments(assignments.filter((assigment) => assigment.id !== id));
+      } else {
+        toast.error('Failed to delete assigment');
+        console.error('Failed to delete assignment:', data.message);
+      }
+    } catch (error) {
+      toast.error('An error occurred. Please try again.');
+      console.error('Error:', error);
+    }
+  };
+
+  const handleEdit = (assigment) => {
+    setEditAssignment(assigment); 
+  };
+
   return (
     <div className="announcements-page">
       <Sidebar />
       <div className="main-content">
         <h1 className='title'>Add Assignments</h1>
         <Formik
-          initialValues={initialValues}
+          initialValues={editAssignment || initialValues}
           validationSchema={validationSchema}
+          enableReinitialize 
           onSubmit={handleSubmit}
         >
           {({ isSubmitting }) => (
@@ -95,7 +127,7 @@ const Assignment = () => {
                 <ErrorMessage name="content" component="div" className="error" />
               </div>
               <button type="submit" className="add-button" disabled={loading}>
-                {loading ? 'Please wait...' : 'Add Assignment'}
+                {loading ? 'Please wait...' : editAssignment ? 'Update Assignment' : 'Add Assignment'}
               </button>
               {error && <p className="error">{error}</p>}
             </Form>
@@ -111,8 +143,8 @@ const Assignment = () => {
               <h3>{assignment.title}</h3>
               <p>{assignment.content}</p>
               <div className="butonsssss">
-                <button className="edit-button">Edit</button>
-                <button className="delete-button">Delete</button>
+              <button className="edit-button" onClick={() => handleEdit(assignment)}>Edit</button>
+              <button className="delete-button" onClick={() => handleDelete(assignment.id)}>Delete</button>
               </div>
             </div>
           ))}
