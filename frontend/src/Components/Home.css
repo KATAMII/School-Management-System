@@ -77,7 +77,10 @@ body {
     margin-top: 100px;
     color: white;
   }
-  
+  #tit{
+    font-size:3rem;
+    color: black;
+  }
   .admin-register-link {
     display: inline-block;
     margin-top: 20px;
@@ -89,7 +92,7 @@ body {
     font-size: 1.3rem;
   }
  .title{
-    font-size: 2rem;
+    font-size: 4rem;
  } 
   .admin-register-link:hover {
     background-color: #218838;

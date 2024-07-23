@@ -31,6 +31,10 @@ const Sidebar = () => {
           <li>
             <NavLink to="/admin/classes" className={({ isActive }) => (isActive ? 'active-link' : '')}>Classes</NavLink>
           </li>
+          <li>
+            <NavLink to="/AdminRegister" className={({ isActive }) => (isActive ? 'active-link' : '')}>Admin Register</NavLink>
+          </li>
+          
           <button className="btnn" onClick={handleLogout}>Log Out</button>
         </ul>
       </nav>

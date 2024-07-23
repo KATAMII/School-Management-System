@@ -29,8 +29,8 @@ function Home() {
         </div>
       </nav>
       <div className="home-body">
-        <h1 className='title'>School Management System</h1>
-        <Link to="/AdminRegister" className="admin-register-link">Admin Register</Link>
+        <h1 className='title' id='tit'>School Management System</h1>
+        <h1 className='title'>Welcome All </h1>
       </div>
     </div>
   );

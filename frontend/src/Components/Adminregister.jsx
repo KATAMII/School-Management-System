@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { apiBase } from '../../utils/config';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Sidebar from '../pages/Admin/Sidebar';
 
 const AdminRegister = () => {
   const [loading, setLoading] = useState(false);
@@ -58,6 +59,7 @@ const AdminRegister = () => {
 
   return (
     <div className="admin-register-container">
+      <Sidebar />
       <h1>Admin Register</h1>
       <form onSubmit={formik.handleSubmit} className="form">
         <div className="form-control">
