@@ -109,9 +109,9 @@ const AdminRegister = () => {
         <button type="submit" className="register-button" disabled={loading}>
           {loading ? 'Please wait...' : 'Register'}
         </button>
-        <p className="signin-again">
+        {/* <p className="signin-again">
           Already have an account? <a href="/SignIn">Sign In</a>
-        </p>
+        </p> */}
         {error && <p className="error">{error}</p>}
       </form>
       <ToastContainer />
