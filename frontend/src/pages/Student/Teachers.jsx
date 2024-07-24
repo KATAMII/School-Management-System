@@ -5,9 +5,11 @@ import { apiBase } from '../../../utils/config';
 
 const StudentTeachersview = () => {
   const [teachers, setTeachers] = useState([]);
+  const [fetching, setFetching] = useState(false);
 
   useEffect(() => {
     const fetchTeachers = async () => {
+      setFetching(true); 
       try {
         const response = await fetch(`${apiBase}/api/teacher/teachers`);
         const data = await response.json();
@@ -18,6 +20,8 @@ const StudentTeachersview = () => {
         }
       } catch (error) {
         console.error('Error:', error);
+      }finally{
+        setFetching(false);
       }
     };
 
@@ -29,7 +33,8 @@ const StudentTeachersview = () => {
       <Sidebar />
       <div className="main-content">
         <h2 className='title'>School Teachers</h2>
-        <div className="teachers-list">
+        {fetching ?(<div className="loading">Loading Teachers...</div>):
+        (<div className="teachers-list">
           {teachers.map((teacher, index) => (
             <div key={index} className="teacher-card">
               <h3>{teacher.name}</h3>
@@ -38,7 +43,9 @@ const StudentTeachersview = () => {
               <p>Subject: {teacher.subject}</p>
             </div>
           ))}
-        </div>
+        </div>)
+        }
+        
       </div>
     </div>
   );

@@ -12,6 +12,7 @@ const StudentAssignments = () => {
   const [studentId, setStudentId] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [fetching, setFetching] = useState(false);
 
   const initialValues = {
     title: '',
@@ -27,6 +28,7 @@ const StudentAssignments = () => {
 
   useEffect(() => {
     const fetchAssignments = async () => {
+      setFetching(true); 
       try {
         const response = await fetch(`${apiBase}/api/assignment/assignments`);
         const data = await response.json();
@@ -37,6 +39,8 @@ const StudentAssignments = () => {
         }
       } catch (error) {
         console.error('Error:', error);
+      }finally{
+        setFetching(false);
       }
     };
 
@@ -111,14 +115,17 @@ const StudentAssignments = () => {
       <Sidebar />
       <div className="main-content">
         <h1 className='title'>Assignments</h1>
-        <div className="assignments-list">
+        {fetching ? (<div className="loading">Loading assignments...</div>) :
+        (<div className="assignments-list">
           {assignments.map((assignment, index) => (
             <div key={index} className="assignment-card">
               <h3>{assignment.title}</h3>
               <p>{assignment.content}</p>
             </div>
           ))}
-        </div>
+        </div>)
+        }
+        
         <h1 className='title'>Submit Assignment</h1>
         <Formik
           initialValues={initialValues}
