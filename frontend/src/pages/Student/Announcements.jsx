@@ -1,28 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import Sidebar from './sidebar';
-import './Announcements.css';
-import { apiBase } from '../../../utils/config'; 
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState, useEffect } from "react";
+import Sidebar from "./sidebar";
+import "./Announcements.css";
+import { apiBase } from "../../../utils/config";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const StudentAnnouncements = () => {
   const [announcements, setAnnouncements] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchAnnouncements = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`${apiBase}/api/announcement/announcements`);
+        const response = await fetch(
+          `${apiBase}/api/announcement/announcements`,
+        );
         const data = await response.json();
         if (data.success) {
           setAnnouncements(data.data);
         } else {
-          setError('Failed to fetch announcements');
+          setError("Failed to fetch announcements");
         }
       } catch (error) {
-        setError('Error fetching announcements');
+        setError("Error fetching announcements");
       } finally {
         setLoading(false);
       }

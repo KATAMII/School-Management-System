@@ -1,48 +1,47 @@
 .choose-user-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background: url('../assets/chooce5bg.jpeg') no-repeat center center fixed;
-    background-size: cover;
-    color: white;
-    text-align: center;
-    backdrop-filter: blur(4px); 
-  }
-  
-  .choose-user-container h1 {
-    margin-bottom: 20px;
-    font-size: 2em;
-    background: rgba(0, 0, 0, 0.5); 
-    padding: 10px 20px;
-    border-radius: 10px;
-  }
-  
-  .card-container {
-    display: flex;
-    gap: 20px;
-  }
-  
-  .card {
-    background-color: rgba(0, 123, 255, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    width: 150px;
-    height: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: transform 0.2s;
-  }
-  
-  .card:hover {
-    transform: scale(1.05);
-  }
-  
-  .card h2 {
-    color: white;
-    font-size: 1.5em;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: url("../assets/chooce5bg.jpeg") no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  text-align: center;
+  backdrop-filter: blur(4px);
+}
+
+.choose-user-container h1 {
+  margin-bottom: 20px;
+  font-size: 2em;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.card-container {
+  display: flex;
+  gap: 20px;
+}
+
+.card {
+  background-color: rgba(0, 123, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card h2 {
+  color: white;
+  font-size: 1.5em;
+}

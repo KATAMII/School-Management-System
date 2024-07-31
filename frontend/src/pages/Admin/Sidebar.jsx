@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
-import { NavLink ,useNavigate } from 'react-router-dom';
-import './sidebar.css';
-import AuthContext from '../../../../server/Authentication/authentication'
+import { NavLink, useNavigate } from "react-router-dom";
+import "./sidebar.css";
+import AuthContext from "../../../../server/Authentication/authentication";
 
 const Sidebar = () => {
   const { isLoggedIn, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    logout();  
-    navigate('/ChooseUser');  
+    logout();
+    navigate("/ChooseUser");
   };
   return (
     <div className="sidebar">
@@ -17,25 +17,57 @@ const Sidebar = () => {
       <nav>
         <ul>
           <li>
-            <NavLink to="/admin/students" className={({ isActive }) => (isActive ? 'active-link' : '')}>Students</NavLink>
+            <NavLink
+              to="/admin/students"
+              className={({ isActive }) => (isActive ? "active-link" : "")}
+            >
+              Students
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/admin/teachers" className={({ isActive }) => (isActive ? 'active-link' : '')}>Teachers</NavLink>
+            <NavLink
+              to="/admin/teachers"
+              className={({ isActive }) => (isActive ? "active-link" : "")}
+            >
+              Teachers
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/admin/announcements" className={({ isActive }) => (isActive ? 'active-link' : '')}>Announcements</NavLink>
+            <NavLink
+              to="/admin/announcements"
+              className={({ isActive }) => (isActive ? "active-link" : "")}
+            >
+              Announcements
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/admin/assignment" className={({ isActive }) => (isActive ? 'active-link' : '')}>Assignments</NavLink>
+            <NavLink
+              to="/admin/assignment"
+              className={({ isActive }) => (isActive ? "active-link" : "")}
+            >
+              Assignments
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/admin/classes" className={({ isActive }) => (isActive ? 'active-link' : '')}>Classes</NavLink>
+            <NavLink
+              to="/admin/classes"
+              className={({ isActive }) => (isActive ? "active-link" : "")}
+            >
+              Classes
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/AdminRegister" className={({ isActive }) => (isActive ? 'active-link' : '')}>Admin Register</NavLink>
+            <NavLink
+              to="/AdminRegister"
+              className={({ isActive }) => (isActive ? "active-link" : "")}
+            >
+              Admin Register
+            </NavLink>
           </li>
-          
-          <button className="btnn" onClick={handleLogout}>Log Out</button>
+
+          <button className="btnn" onClick={handleLogout}>
+            Log Out
+          </button>
         </ul>
       </nav>
     </div>

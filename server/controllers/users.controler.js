@@ -14,13 +14,16 @@ export const createUser = async (req, res) => {
         name,
         email,
         password: hashpassword,
-        
       },
     });
-    res.status(201).json({ success: true, message: "User registered successfully" });
+    res
+      .status(201)
+      .json({ success: true, message: "User registered successfully" });
   } catch (e) {
     console.log(e.message);
-    res.status(500).json({ success: false, message: "An error occurred in the server" });
+    res
+      .status(500)
+      .json({ success: false, message: "An error occurred in the server" });
   }
 };
 
@@ -32,19 +35,22 @@ export const loginUser = async (req, res) => {
     });
 
     if (!user) {
-      return res.status(401).json({ success: false, message: "Wrong login credentials" });
+      return res
+        .status(401)
+        .json({ success: false, message: "Wrong login credentials" });
     }
 
     const passwordMatch = bcrypt.compareSync(password, user.password);
     if (!passwordMatch) {
-      return res.status(401).json({ success: false, message: "Wrong login credentials" });
+      return res
+        .status(401)
+        .json({ success: false, message: "Wrong login credentials" });
     }
 
     const payload = {
       id: user.id,
-      name:user.name,
+      name: user.name,
       email: user.email,
-      
     };
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: "5h",

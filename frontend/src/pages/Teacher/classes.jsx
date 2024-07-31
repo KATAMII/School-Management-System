@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import Sidebar from './sidebar';
-import './classes.css';
-import { apiBase } from '../../../utils/config'; 
+import React, { useState, useEffect } from "react";
+import Sidebar from "./sidebar";
+import "./classes.css";
+import { apiBase } from "../../../utils/config";
 
 const Classesview = () => {
   const [classes, setClasses] = useState([]);
@@ -14,10 +14,10 @@ const Classesview = () => {
         if (data.success) {
           setClasses(data.data);
         } else {
-          console.error('Failed to fetch classes');
+          console.error("Failed to fetch classes");
         }
       } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
       }
     };
 

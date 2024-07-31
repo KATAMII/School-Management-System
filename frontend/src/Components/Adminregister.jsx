@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import './Adminregister.css';
-import { useNavigate } from 'react-router-dom';
-import { apiBase } from '../../utils/config';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Sidebar from '../pages/Admin/Sidebar';
+import React, { useState } from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import "./Adminregister.css";
+import { useNavigate } from "react-router-dom";
+import { apiBase } from "../../utils/config";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Sidebar from "../pages/Admin/Sidebar";
 
 const AdminRegister = () => {
   const [loading, setLoading] = useState(false);
@@ -19,16 +19,16 @@ const AdminRegister = () => {
       setLoading(true);
       setError(false);
       const response = await fetch(`${apiBase}/api/admin/register`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(values)
+        body: JSON.stringify(values),
       });
       const data = await response.json();
       if (data.success) {
-        toast.success('Admin registered successfully!');
-        navigate('/Adminsignin');
+        toast.success("Admin registered successfully!");
+        navigate("/Adminsignin");
       } else {
         setError(data.message);
         toast.error(data.message);
@@ -43,18 +43,22 @@ const AdminRegister = () => {
 
   const formik = useFormik({
     initialValues: {
-      name: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
     },
     validationSchema: Yup.object({
-      name: Yup.string().required('Required'),
-      email: Yup.string().email('Invalid email format').required('Required'),
-      password: Yup.string().min(6, 'Password should be minimum 6 characters').required('Required'),
-      confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match').required('Required'),
+      name: Yup.string().required("Required"),
+      email: Yup.string().email("Invalid email format").required("Required"),
+      password: Yup.string()
+        .min(6, "Password should be minimum 6 characters")
+        .required("Required"),
+      confirmPassword: Yup.string()
+        .oneOf([Yup.ref("password"), null], "Passwords must match")
+        .required("Required"),
     }),
-    onSubmit: handleSubmit
+    onSubmit: handleSubmit,
   });
 
   return (
@@ -68,10 +72,14 @@ const AdminRegister = () => {
             type="text"
             id="name"
             name="name"
-            {...formik.getFieldProps('name')}
-            className={formik.touched.name && formik.errors.name ? 'input-error' : ''}
+            {...formik.getFieldProps("name")}
+            className={
+              formik.touched.name && formik.errors.name ? "input-error" : ""
+            }
           />
-          {formik.touched.name && formik.errors.name ? <div className="error">{formik.errors.name}</div> : null}
+          {formik.touched.name && formik.errors.name ? (
+            <div className="error">{formik.errors.name}</div>
+          ) : null}
         </div>
         <div className="form-control">
           <label htmlFor="email">Email</label>
@@ -79,10 +87,14 @@ const AdminRegister = () => {
             type="email"
             id="email"
             name="email"
-            {...formik.getFieldProps('email')}
-            className={formik.touched.email && formik.errors.email ? 'input-error' : ''}
+            {...formik.getFieldProps("email")}
+            className={
+              formik.touched.email && formik.errors.email ? "input-error" : ""
+            }
           />
-          {formik.touched.email && formik.errors.email ? <div className="error">{formik.errors.email}</div> : null}
+          {formik.touched.email && formik.errors.email ? (
+            <div className="error">{formik.errors.email}</div>
+          ) : null}
         </div>
         <div className="form-control">
           <label htmlFor="password">Password</label>
@@ -90,10 +102,16 @@ const AdminRegister = () => {
             type="password"
             id="password"
             name="password"
-            {...formik.getFieldProps('password')}
-            className={formik.touched.password && formik.errors.password ? 'input-error' : ''}
+            {...formik.getFieldProps("password")}
+            className={
+              formik.touched.password && formik.errors.password
+                ? "input-error"
+                : ""
+            }
           />
-          {formik.touched.password && formik.errors.password ? <div className="error">{formik.errors.password}</div> : null}
+          {formik.touched.password && formik.errors.password ? (
+            <div className="error">{formik.errors.password}</div>
+          ) : null}
         </div>
         <div className="form-control">
           <label htmlFor="confirmPassword">Confirm Password</label>
@@ -101,13 +119,19 @@ const AdminRegister = () => {
             type="password"
             id="confirmPassword"
             name="confirmPassword"
-            {...formik.getFieldProps('confirmPassword')}
-            className={formik.touched.confirmPassword && formik.errors.confirmPassword ? 'input-error' : ''}
+            {...formik.getFieldProps("confirmPassword")}
+            className={
+              formik.touched.confirmPassword && formik.errors.confirmPassword
+                ? "input-error"
+                : ""
+            }
           />
-          {formik.touched.confirmPassword && formik.errors.confirmPassword ? <div className="error">{formik.errors.confirmPassword}</div> : null}
+          {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
+            <div className="error">{formik.errors.confirmPassword}</div>
+          ) : null}
         </div>
         <button type="submit" className="register-button" disabled={loading}>
-          {loading ? 'Please wait...' : 'Register'}
+          {loading ? "Please wait..." : "Register"}
         </button>
         {/* <p className="signin-again">
           Already have an account? <a href="/SignIn">Sign In</a>

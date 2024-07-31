@@ -1,29 +1,28 @@
-import React, { useState ,useEffect} from 'react';
-import Sidebar from './Sidebar';
-import './students.css';
-import { apiBase } from '../../../utils/config';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import Sidebar from "./Sidebar";
+import "./students.css";
+import { apiBase } from "../../../utils/config";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const Students = () => {
   const [students, setStudents] = useState([]);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    studentclass: '',
-    teacherId: '' 
+    name: "",
+    email: "",
+    password: "",
+    studentclass: "",
+    teacherId: "",
   });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
- 
   const getCookie = (name) => {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
+    if (parts.length === 2) return parts.pop().split(";").shift();
     return null;
   };
 
@@ -35,10 +34,10 @@ const Students = () => {
         if (data.success) {
           setStudents(data.data);
         } else {
-          console.error('Failed to fetch students');
+          console.error("Failed to fetch students");
         }
       } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
       }
     };
 
@@ -46,14 +45,13 @@ const Students = () => {
   }, []);
 
   useEffect(() => {
-    
-    const token = getCookie('teacher_access_token');
+    const token = getCookie("teacher_access_token");
     if (token) {
-      const parsedToken = JSON.parse(atob(token.split('.')[1]));
-      const teacherId = parsedToken.id; 
+      const parsedToken = JSON.parse(atob(token.split(".")[1]));
+      const teacherId = parsedToken.id;
       setFormData((prevFormData) => ({
         ...prevFormData,
-        teacherId
+        teacherId,
       }));
     }
   }, []);
@@ -69,33 +67,33 @@ const Students = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError("");
     try {
       const response = await fetch(`${apiBase}/api/student/register`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
       const data = await response.json();
       if (data.success) {
-        toast.success('Student registered successfully!');
+        toast.success("Student registered successfully!");
         setStudents([...students, formData]);
         setFormData({
-          name: '',
-          email: '',
-          password: '',
-          studentclass: '',
-          teacherId: '' 
+          name: "",
+          email: "",
+          password: "",
+          studentclass: "",
+          teacherId: "",
         });
       } else {
         setError(data.message);
         toast.error(data.message);
       }
     } catch (e) {
-      setError('An error occurred. Please try again.');
-      toast.error('An error occurred. Please try again.');
+      setError("An error occurred. Please try again.");
+      toast.error("An error occurred. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -105,26 +103,26 @@ const Students = () => {
     console.log(`Deleting teacher with ID: ${id}`);
     try {
       const response = await fetch(`${apiBase}/api/student/delete/${id}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
       const data = await response.json();
       if (data.success) {
-        toast.success('Teacher deleted successfully!');
+        toast.success("Teacher deleted successfully!");
         setStudents(students.filter((student) => student.id !== id));
       } else {
-        toast.error('Failed to delete teacher');
-        console.error('Failed to delete teacher:', data.message);
+        toast.error("Failed to delete teacher");
+        console.error("Failed to delete teacher:", data.message);
       }
     } catch (error) {
-      toast.error('An error occurred. Please try again.');
-      console.error('Error:', error);
+      toast.error("An error occurred. Please try again.");
+      console.error("Error:", error);
     }
   };
   return (
     <div className="students-page">
       <Sidebar />
       <div className="main-content">
-        <h2 className='title'>Register Students</h2>
+        <h2 className="title">Register Students</h2>
         <form className="student-form" onSubmit={handleSubmit}>
           <div className="form-control">
             <label htmlFor="name">Name</label>
@@ -171,18 +169,23 @@ const Students = () => {
             />
           </div>
           <button type="submit" className="register-button" disabled={loading}>
-            {loading ? 'Please wait...' : 'Register Student'}
+            {loading ? "Please wait..." : "Register Student"}
           </button>
           {error && <p className="error">{error}</p>}
         </form>
-        <h2 className='title'>Registered Students</h2>
+        <h2 className="title">Registered Students</h2>
         <div className="students-list">
           {students.map((student, index) => (
             <div key={index} className="student-card">
               <h3>{student.name}</h3>
               <p>Email: {student.email}</p>
               <p>Class: {student.studentclass}</p>
-              <button className="delete-button" onClick={() => handleDelete(student.id)}>Delete</button>
+              <button
+                className="delete-button"
+                onClick={() => handleDelete(student.id)}
+              >
+                Delete
+              </button>
             </div>
           ))}
         </div>

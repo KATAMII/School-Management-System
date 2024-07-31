@@ -1,70 +1,69 @@
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-  }
-  
-  .admin-register-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background: url(../assets/choose2bg.jpeg)no-repeat center center fixed;
-    background-size: cover;
-    color: white;
-    text-align: center;
-  }
-  
-  .admin-register-container h1 {
-    margin-bottom: 20px;
-    font-size: 2em;
-    background: rgba(0, 0, 0, 0.5); 
-    padding: 10px 20px;
-    border-radius: 10px;
-  }
-  
-  .form {
-    background: rgba(0, 0, 0, 0.7);
-    padding: 20px;
-    border-radius: 10px;
-    width: 300px;
-  }
-  
-  .form-control {
-    margin-bottom: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .form-control label {
-    margin-bottom: 5px;
-  }
-  
-  .form-control input {
-    padding: 10px;
-    width: 100%;
-    border-radius: 5px;
-    border: none;
-  }
-  
-  .error {
-    color: red;
-    font-size: 0.8em;
-  }
-  
-  button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    border: none;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
-    width: 100%;
-    font-size: 1em;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.admin-register-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: url(../assets/choose2bg.jpeg) no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  text-align: center;
+}
+
+.admin-register-container h1 {
+  margin-bottom: 20px;
+  font-size: 2em;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.form {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+}
+
+.form-control {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-control label {
+  margin-bottom: 5px;
+}
+
+.form-control input {
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+}
+
+.error {
+  color: red;
+  font-size: 0.8em;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 1em;
+}
+
+button:hover {
+  background-color: #0056b3;
+}

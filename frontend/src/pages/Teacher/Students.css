@@ -1,43 +1,42 @@
 .students-page {
-    display: flex;
-  }
-  
-  .main-content {
-    margin-left: 250px;
-    padding: 20px;
-  }
-  
-  .title {
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    text-align: center;
-  }
-  
-  .students-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: space-around;
-  }
-  
-  .student-card {
-    background: white;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: -1px 10px 5px 0px rgba(0, 0, 0, 0.75);
-    -webkit-box-shadow: -1px 10px 5px 0px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: -1px 10px 5px 0px rgba(0, 0, 0, 0.75);
-    font-size: 1.5rem;
-    width: 300px; 
-  }
-  
-  .student-card h3 {
-    margin: 0 0 10px 0;
-    color: #007bff;
-  }
-  
-  .student-card p {
-    margin: 5px 0;
-    color: #333;
-  }
-  
+  display: flex;
+}
+
+.main-content {
+  margin-left: 250px;
+  padding: 20px;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.students-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-around;
+}
+
+.student-card {
+  background: white;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: -1px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: -1px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -1px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  font-size: 1.5rem;
+  width: 300px;
+}
+
+.student-card h3 {
+  margin: 0 0 10px 0;
+  color: #007bff;
+}
+
+.student-card p {
+  margin: 5px 0;
+  color: #333;
+}

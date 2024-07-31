@@ -18,10 +18,14 @@ export const createTeacher = async (req, res) => {
         subject,
       },
     });
-    res.status(201).json({ success: true, message: "Teacher registered successfully" });
+    res
+      .status(201)
+      .json({ success: true, message: "Teacher registered successfully" });
   } catch (e) {
     console.log(e.message);
-    res.status(500).json({ success: false, message: "An error occurred in the server" });
+    res
+      .status(500)
+      .json({ success: false, message: "An error occurred in the server" });
   }
 };
 
@@ -33,12 +37,16 @@ export const loginTeacher = async (req, res) => {
     });
 
     if (!user) {
-      return res.status(401).json({ success: false, message: "Wrong login credentials" });
+      return res
+        .status(401)
+        .json({ success: false, message: "Wrong login credentials" });
     }
 
     const passwordMatch = bcrypt.compareSync(password, user.password);
     if (!passwordMatch) {
-      return res.status(401).json({ success: false, message: "Wrong login credentials" });
+      return res
+        .status(401)
+        .json({ success: false, message: "Wrong login credentials" });
     }
 
     const payload = {
@@ -62,7 +70,9 @@ export const getTeachers = async (req, res) => {
     const teachers = await prisma.teacher.findMany();
     res.status(200).json({ success: true, data: teachers });
   } catch (error) {
-    res.status(500).json({ success: false, message: 'Error fetching teachers' });
+    res
+      .status(500)
+      .json({ success: false, message: "Error fetching teachers" });
   }
 };
 
@@ -85,12 +95,12 @@ export const getAllStudents = async (req, res) => {
 };
 
 export const getStudentsByTeacher = async (req, res) => {
-  const teacherId = req.user.id; 
+  const teacherId = req.user.id;
   try {
     const students = await prisma.student.findMany({
       where: { teacherId: teacherId },
     });
-    console.log('Found students:', students);
+    console.log("Found students:", students);
     res.json({ students });
   } catch (error) {
     if (!res.headersSent) {
@@ -100,13 +110,13 @@ export const getStudentsByTeacher = async (req, res) => {
 };
 
 export const submitGrade = async (req, res) => {
-  const { studentId, subject, marks ,studentname} = req.body;
+  const { studentId, subject, marks, studentname } = req.body;
 
   try {
     const grade = await prisma.grade.create({
       data: {
         studentId,
-        teacherId: req.user.id,  
+        teacherId: req.user.id,
         subject,
         marks,
       },
@@ -132,12 +142,12 @@ export const getGradesByStudent = async (req, res) => {
 };
 
 export const getGradesByTeacher = async (req, res) => {
-  const teacherId = req.user.id; 
+  const teacherId = req.user.id;
   try {
     const grades = await prisma.grade.findMany({
       where: { teacherId },
       include: {
-        student: true, 
+        student: true,
       },
     });
     res.json({ grades });
@@ -160,11 +170,11 @@ export const getGradesForLoggedInStudent = async (req, res) => {
   }
 };
 
-export const deleteteacher= async (req, res) => {
+export const deleteteacher = async (req, res) => {
   const { id } = req.params;
   try {
     await prisma.teacher.delete({
-      where: { id: id }, 
+      where: { id: id },
     });
     res.json({ success: true });
   } catch (error) {

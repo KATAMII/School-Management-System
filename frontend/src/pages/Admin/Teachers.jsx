@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import Sidebar from './Sidebar';
-import './Teachers.css';
-import { apiBase } from '../../../utils/config';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import Sidebar from "./Sidebar";
+import "./Teachers.css";
+import { apiBase } from "../../../utils/config";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const Teachers = () => {
   const [students, setStudents] = useState([]);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    teachersclass: '',
-    subject: '',
+    name: "",
+    email: "",
+    password: "",
+    teachersclass: "",
+    subject: "",
   });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,10 +27,10 @@ const Teachers = () => {
         if (data.success) {
           setStudents(data.data);
         } else {
-          console.error('Failed to fetch students');
+          console.error("Failed to fetch students");
         }
       } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
       }
     };
 
@@ -48,33 +48,33 @@ const Teachers = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError("");
     try {
       const response = await fetch(`${apiBase}/api/teacher/register`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
       const data = await response.json();
       if (data.success) {
-        toast.success('Teacher registered successfully!');
+        toast.success("Teacher registered successfully!");
         setStudents([...students, data.data]);
         setFormData({
-          name: '',
-          email: '',
-          password: '',
-          teachersclass: '',
-          subject: '',
+          name: "",
+          email: "",
+          password: "",
+          teachersclass: "",
+          subject: "",
         });
       } else {
         setError(data.message);
         toast.error(data.message);
       }
     } catch (e) {
-      setError('An error occurred. Please try again.');
-      toast.error('An error occurred. Please try again.');
+      setError("An error occurred. Please try again.");
+      toast.error("An error occurred. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -84,19 +84,19 @@ const Teachers = () => {
     console.log(`Deleting teacher with ID: ${id}`);
     try {
       const response = await fetch(`${apiBase}/api/teacher/delete/${id}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
       const data = await response.json();
       if (data.success) {
-        toast.success('Teacher deleted successfully!');
+        toast.success("Teacher deleted successfully!");
         setStudents(students.filter((student) => student.id !== id));
       } else {
-        toast.error('Failed to delete teacher');
-        console.error('Failed to delete teacher:', data.message);
+        toast.error("Failed to delete teacher");
+        console.error("Failed to delete teacher:", data.message);
       }
     } catch (error) {
-      toast.error('An error occurred. Please try again.');
-      console.error('Error:', error);
+      toast.error("An error occurred. Please try again.");
+      console.error("Error:", error);
     }
   };
 
@@ -162,25 +162,32 @@ const Teachers = () => {
             />
           </div>
           <button type="submit" className="register-button" disabled={loading}>
-            {loading ? 'Please wait...' : 'Register Teacher'}
+            {loading ? "Please wait..." : "Register Teacher"}
           </button>
           {error && <p className="error">{error}</p>}
         </form>
         <h2 className="title">Registered Teachers</h2>
-        {loading ? 'loading registered teachers':
-         <div className="students-list">
-         {students.map((student, index) => (
-           <div key={index} className="student-card">
-             <h3>{student.name}</h3>
-             <p>Email: {student.email}</p>
-             <p>Class: {student.teachersclass}</p>
-             <p>Subject: {student.subject}</p>
-             <button className="delete-button" onClick={() => handleDelete(student.id)}>Delete</button>
-           </div>
-         ))}
-       </div>
-        }
-       
+        {loading ? (
+          "loading registered teachers"
+        ) : (
+          <div className="students-list">
+            {students.map((student, index) => (
+              <div key={index} className="student-card">
+                <h3>{student.name}</h3>
+                <p>Email: {student.email}</p>
+                <p>Class: {student.teachersclass}</p>
+                <p>Subject: {student.subject}</p>
+                <button
+                  className="delete-button"
+                  onClick={() => handleDelete(student.id)}
+                >
+                  Delete
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+
         <ToastContainer />
       </div>
     </div>

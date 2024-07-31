@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import Sidebar from './sidebar';
-import './Teachers.css';
-import { apiBase } from '../../../utils/config';
+import React, { useState, useEffect } from "react";
+import Sidebar from "./sidebar";
+import "./Teachers.css";
+import { apiBase } from "../../../utils/config";
 
 const Teachersview = () => {
   const [teachers, setTeachers] = useState([]);
@@ -14,10 +14,10 @@ const Teachersview = () => {
         if (data.success) {
           setTeachers(data.data);
         } else {
-          console.error('Failed to fetch teachers');
+          console.error("Failed to fetch teachers");
         }
       } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
       }
     };
 
@@ -28,7 +28,7 @@ const Teachersview = () => {
     <div className="teachers-page">
       <Sidebar />
       <div className="main-content">
-        <h2 className='title'>School Teachers</h2>
+        <h2 className="title">School Teachers</h2>
         <div className="teachers-list">
           {teachers.map((teacher, index) => (
             <div key={index} className="teacher-card">

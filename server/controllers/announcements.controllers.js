@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -12,10 +12,18 @@ export const createAnnouncements = async (req, res) => {
         content,
       },
     });
-    res.status(201).json({ success: true, message: "Assignment created successfully", data: newAssignment });
+    res
+      .status(201)
+      .json({
+        success: true,
+        message: "Assignment created successfully",
+        data: newAssignment,
+      });
   } catch (error) {
     console.error(error.message);
-    res.status(500).json({ success: false, message: 'Failed to create assignment' });
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to create assignment" });
   }
 };
 
@@ -25,7 +33,9 @@ export const getAnnouncements = async (req, res) => {
     res.status(200).json({ success: true, data: assignments });
   } catch (error) {
     console.error(error.message);
-    res.status(500).json({ success: false, message: 'Failed to fetch assignments' });
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to fetch assignments" });
   }
 };
 
@@ -33,7 +43,7 @@ export const deleteAnnouncement = async (req, res) => {
   const { id } = req.params;
   try {
     await prisma.announcements.delete({
-      where: { id: id }, 
+      where: { id: id },
     });
     res.json({ success: true });
   } catch (error) {

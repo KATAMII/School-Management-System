@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
-import { v4 as uuidv4 } from 'uuid';
-import path from 'path';
-import fs from 'fs';
+import { v4 as uuidv4 } from "uuid";
+import path from "path";
+import fs from "fs";
 
 const prisma = new PrismaClient();
 
@@ -10,12 +10,14 @@ export const submitAssignment = async (req, res) => {
   const file = req.file;
 
   if (!file) {
-    return res.status(400).json({ success: false, message: 'File is required' });
+    return res
+      .status(400)
+      .json({ success: false, message: "File is required" });
   }
 
   try {
     const fileName = `${uuidv4()}_${file.originalname}`;
-    const filePath = path.join(process.cwd(), 'uploads', fileName);
+    const filePath = path.join(process.cwd(), "uploads", fileName);
 
     fs.renameSync(file.path, filePath);
 

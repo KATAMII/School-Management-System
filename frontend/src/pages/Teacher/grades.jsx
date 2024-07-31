@@ -1,84 +1,83 @@
-import React, { useState, useEffect } from 'react';
-import TeacherSidebar from './sidebar';
-import './grades.css';
-import { apiBase } from '../../../utils/config';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState, useEffect } from "react";
+import TeacherSidebar from "./sidebar";
+import "./grades.css";
+import { apiBase } from "../../../utils/config";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const EnterGrades = () => {
   const [students, setStudents] = useState([]);
   const [grades, setGrades] = useState([]);
   const [formData, setFormData] = useState({
-    studentId: '',
-    subject: '',
-    marks: '',
+    studentId: "",
+    subject: "",
+    marks: "",
   });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const getCookie = (name) => {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
+    if (parts.length === 2) return parts.pop().split(";").shift();
     return null;
   };
 
   useEffect(() => {
     const fetchStudents = async () => {
-      const token = getCookie('teacher_access_token');
-      console.log('Read cookie:', token); 
+      const token = getCookie("teacher_access_token");
+      console.log("Read cookie:", token);
       if (!token) {
-        setError('No token found');
-        console.error('No token found');
+        setError("No token found");
+        console.error("No token found");
         return;
       }
-  
+
       try {
         const response = await fetch(`${apiBase}/api/teacher/students`, {
           headers: {
-            'Authorization': `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
-          credentials: 'include', 
+          credentials: "include",
         });
         const data = await response.json();
-        console.log('Fetched students:', data); 
+        console.log("Fetched students:", data);
         if (response.ok) {
           setStudents(data.students);
         } else {
-          console.error('Failed to fetch students:', data.message);
+          console.error("Failed to fetch students:", data.message);
           setError(data.message);
         }
       } catch (error) {
-        console.error('Error fetching students:', error);
+        console.error("Error fetching students:", error);
         setError(error.message);
       }
     };
-  
 
     const fetchGrades = async () => {
-        const token = getCookie('teacher_access_token');
-        if (!token) {
-          setError('No token found');
-          return;
+      const token = getCookie("teacher_access_token");
+      if (!token) {
+        setError("No token found");
+        return;
+      }
+
+      try {
+        const response = await fetch(`${apiBase}/api/teacher/teacher/grades`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          credentials: "include",
+        });
+        const data = await response.json();
+        if (response.ok) {
+          setGrades(data.grades);
+        } else {
+          setError(data.message);
         }
-  
-        try {
-          const response = await fetch(`${apiBase}/api/teacher/teacher/grades`, {
-            headers: {
-              'Authorization': `Bearer ${token}`,
-            },
-            credentials: 'include',
-          });
-          const data = await response.json();
-          if (response.ok) {
-            setGrades(data.grades); 
-          } else {
-            setError(data.message);
-          }
-        } catch (error) {
-          setError(error.message);
-        }
-      };
+      } catch (error) {
+        setError(error.message);
+      }
+    };
     fetchGrades();
     fetchStudents();
   }, []);
@@ -87,46 +86,46 @@ const EnterGrades = () => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: name === 'marks' ? parseInt(value) : value,
+      [name]: name === "marks" ? parseInt(value) : value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
-    const token = getCookie('teacher_access_token');
+    setError("");
+    const token = getCookie("teacher_access_token");
     if (!token) {
-      setError('No token found');
-      console.error('No token found');
+      setError("No token found");
+      console.error("No token found");
       return;
     }
 
     try {
       const response = await fetch(`${apiBase}/api/teacher/grades`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-        credentials: 'include', 
+        credentials: "include",
         body: JSON.stringify(formData),
       });
       const data = await response.json();
       if (response.ok) {
-        toast.success('Grade submitted successfully!');
+        toast.success("Grade submitted successfully!");
         setFormData({
-          studentId: '',
-          subject: '',
-          marks: '',
+          studentId: "",
+          subject: "",
+          marks: "",
         });
       } else {
         setError(data.message);
         toast.error(data.message);
       }
     } catch (e) {
-      setError('An error occurred. Please try again.');
-      toast.error('An error occurred. Please try again.');
+      setError("An error occurred. Please try again.");
+      toast.error("An error occurred. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -176,7 +175,7 @@ const EnterGrades = () => {
             <label htmlFor="marks">Marks</label>
             <input
               type="number"
-              id="marks" 
+              id="marks"
               name="marks"
               value={formData.marks}
               onChange={handleChange}
@@ -184,7 +183,7 @@ const EnterGrades = () => {
             />
           </div>
           <button type="submit" className="submit-button" disabled={loading}>
-            {loading ? 'Please wait...' : 'Submit Grade'}
+            {loading ? "Please wait..." : "Submit Grade"}
           </button>
           {error && <p className="error">{error}</p>}
         </form>
@@ -203,7 +202,7 @@ const EnterGrades = () => {
           )}
         </div>
       </div>
-      
+
       <ToastContainer />
     </div>
   );

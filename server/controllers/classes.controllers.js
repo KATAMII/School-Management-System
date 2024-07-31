@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export const getClasses = async (req, res) => {
@@ -22,22 +22,22 @@ export const createClass = async (req, res) => {
   }
 };
 export const deleteClass = async (req, res) => {
-    const { id } = req.params;
-    try {
-      await prisma.class.delete({
-        where: { id: id }, 
-      });
-      res.json({ success: true });
-    } catch (error) {
-      res.status(500).json({ success: false, message: error.message });
-    }
-  };
+  const { id } = req.params;
+  try {
+    await prisma.class.delete({
+      where: { id: id },
+    });
+    res.json({ success: true });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
 
-  export const getClassesCount = async (req, res) => {
-    try {
-      const count = await prisma.class.count();
-      res.json({ count });
-    } catch (error) {
-      res.status(500).json({ message: error.message });
-    }
-  };
+export const getClassesCount = async (req, res) => {
+  try {
+    const count = await prisma.class.count();
+    res.json({ count });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

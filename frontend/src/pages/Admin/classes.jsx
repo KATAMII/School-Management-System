@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import Sidebar from './Sidebar';
-import './classes.css';
-import { apiBase } from '../../../utils/config'; 
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState, useEffect } from "react";
+import Sidebar from "./Sidebar";
+import "./classes.css";
+import { apiBase } from "../../../utils/config";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Classes = () => {
   const [classes, setClasses] = useState([]);
   const [classData, setClassData] = useState({
-    className: '',
-    classTeacher: '',
+    className: "",
+    classTeacher: "",
   });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchClasses = async () => {
@@ -22,10 +22,10 @@ const Classes = () => {
         if (data.success) {
           setClasses(data.data);
         } else {
-          console.error('Failed to fetch classes');
+          console.error("Failed to fetch classes");
         }
       } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
       }
     };
 
@@ -43,30 +43,30 @@ const Classes = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError("");
     try {
       const response = await fetch(`${apiBase}/api/class/create`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(classData),
       });
       const data = await response.json();
       if (data.success) {
-        toast.success('Class added successfully!');
+        toast.success("Class added successfully!");
         setClasses([...classes, data.data]);
         setClassData({
-          className: '',
-          classTeacher: '',
+          className: "",
+          classTeacher: "",
         });
       } else {
         setError(data.message);
         toast.error(data.message);
       }
     } catch (e) {
-      setError('An error occurred. Please try again.');
-      toast.error('An error occurred. Please try again.');
+      setError("An error occurred. Please try again.");
+      toast.error("An error occurred. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -76,19 +76,19 @@ const Classes = () => {
     console.log(`Deleting class with ID: ${id}`);
     try {
       const response = await fetch(`${apiBase}/api/class/delete/${id}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
       const data = await response.json();
       if (data.success) {
-        toast.success('Class deleted successfully!');
+        toast.success("Class deleted successfully!");
         setClasses(classes.filter((classItem) => classItem.id !== id));
       } else {
-        toast.error('Failed to delete class');
-        console.error('Failed to delete class:', data.message);
+        toast.error("Failed to delete class");
+        console.error("Failed to delete class:", data.message);
       }
     } catch (error) {
-      toast.error('An error occurred. Please try again.');
-      console.error('Error:', error);
+      toast.error("An error occurred. Please try again.");
+      console.error("Error:", error);
     }
   };
 
@@ -121,7 +121,7 @@ const Classes = () => {
             />
           </div>
           <button type="submit" className="add-button" disabled={loading}>
-            {loading ? 'Please wait...' : 'Add Class'}
+            {loading ? "Please wait..." : "Add Class"}
           </button>
           {error && <p className="error">{error}</p>}
         </form>

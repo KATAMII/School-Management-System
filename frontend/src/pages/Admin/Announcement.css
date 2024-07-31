@@ -1,114 +1,111 @@
-
 .announcements-page {
-    display: flex;
-  }
-  
-  .main-content {
-    margin-left: 250px;
-    padding: 20px;
-  }
-  
-  h1 {
-    color: #333;
-    font-size: 2rem;
-  }
-  
-  .announcement-form {
-    background: #f4f4f4;
-    padding: 20px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    width: 40rem;
-  }
-  
-  .announcement-form .form-control {
-    margin-bottom: 15px;
-  }
-  
-  .announcement-form .form-control label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .announcement-form .form-control input,
-  .announcement-form .form-control textarea {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1.5rem;
-  }
-  
-  .announcement-form .add-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    border: none;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 1em;
-  }
-  
-  .announcement-form .add-button:hover {
-    background-color: #0056b3;
-  }
-  .butonsssss{
-    display: flex;
-  }
-  .announcements-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 20px;
-    width: 90rem;
-  }
-  
-  .announcement-card {
-    background: white;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: -1px 10px 5px 0px rgba(0,0,0,0.75);
--webkit-box-shadow: -1px 10px 5px 0px rgba(0,0,0,0.75);
--moz-box-shadow: -1px 10px 5px 0px rgba(0,0,0,0.75);
-    width: calc(33.333% - 20px);
-  }
-  
-  .announcement-card h3 {
-    margin: 0 0 10px 0;
-    color: #007bff;
-    font-size: 1.7rem;
-  }
-  
-  .announcement-card p {
-    margin: 5px 0;
-    color: #333;
-    font-size: 1.4rem;
-  }
-  
-  .announcement-card .edit-button
-  {
-    padding: 5px 10px;
-    margin-right: 10px;
-    background-color: #007bff;
-    border: none;
-    color: white;
-    cursor: pointer;
-    border-radius: 3px;
-    font-size: 1.5em;
-  }
-  .delete-button{
-    background-color: #dc3545;
-    padding: 5px 10px;
-    margin-right: 10px;
-    
-    border: none;
-    color: white;
-    cursor: pointer;
-    border-radius: 3px;
-    font-size: 1.5em;
-  }
-  .announcement-card .edit-button:hover,
-  .announcement-card .delete-button:hover {
-    background-color: #0056b3;
-  }
-  
+  display: flex;
+}
+
+.main-content {
+  margin-left: 250px;
+  padding: 20px;
+}
+
+h1 {
+  color: #333;
+  font-size: 2rem;
+}
+
+.announcement-form {
+  background: #f4f4f4;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  width: 40rem;
+}
+
+.announcement-form .form-control {
+  margin-bottom: 15px;
+}
+
+.announcement-form .form-control label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.announcement-form .form-control input,
+.announcement-form .form-control textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1.5rem;
+}
+
+.announcement-form .add-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.announcement-form .add-button:hover {
+  background-color: #0056b3;
+}
+.butonsssss {
+  display: flex;
+}
+.announcements-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+  width: 90rem;
+}
+
+.announcement-card {
+  background: white;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: -1px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: -1px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -1px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  width: calc(33.333% - 20px);
+}
+
+.announcement-card h3 {
+  margin: 0 0 10px 0;
+  color: #007bff;
+  font-size: 1.7rem;
+}
+
+.announcement-card p {
+  margin: 5px 0;
+  color: #333;
+  font-size: 1.4rem;
+}
+
+.announcement-card .edit-button {
+  padding: 5px 10px;
+  margin-right: 10px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 1.5em;
+}
+.delete-button {
+  background-color: #dc3545;
+  padding: 5px 10px;
+  margin-right: 10px;
+
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 1.5em;
+}
+.announcement-card .edit-button:hover,
+.announcement-card .delete-button:hover {
+  background-color: #0056b3;
+}

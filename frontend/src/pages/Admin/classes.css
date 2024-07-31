@@ -1,94 +1,91 @@
 /* Classes.css */
 
 .classes-page {
-    display: flex;
-  }
-  
-  .main-content {
-    margin-left: 250px;
-    padding: 20px;
-  }
-  
-  h1 {
-    color: #333;
-  }
-  
-  .class-form {
-    background: black;
-    padding: 20px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    width: 40rem;
-    color: white;
-  }
-  
-  .class-form .form-control {
-    margin-bottom: 15px;
-  }
-  
-  .class-form .form-control label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .class-form .form-control input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .class-form .add-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    border: none;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 1em;
-  }
-  
-  .class-form .add-button:hover {
-    background-color: #0056b3;
-  }
-  .delete-button{
-    background-color: #dc3545;
-    padding: 5px 10px;
-    margin-right: 10px;
-    
-    border: none;
-    color: white;
-    cursor: pointer;
-    border-radius: 3px;
-    font-size: 1em;
-  }
-  .classes-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 20px;
-  }
-  
-  .class-card {
-    background: white;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: -1px 10px 5px 0px rgba(0,0,0,0.75);
-    -webkit-box-shadow: -1px 10px 5px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: -1px 10px 5px 0px rgba(0,0,0,0.75);
-   
-    
-  }
-  
-  .class-card h3 {
-    margin: 0 0 10px 0;
-    color: #007bff;
-    font-size: 2rem;
-  }
-  
-  .class-card p {
-    margin: 5px 0;
-    color: #333;
-    font-size: 1.6rem;
-  }
-  
+  display: flex;
+}
+
+.main-content {
+  margin-left: 250px;
+  padding: 20px;
+}
+
+h1 {
+  color: #333;
+}
+
+.class-form {
+  background: black;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  width: 40rem;
+  color: white;
+}
+
+.class-form .form-control {
+  margin-bottom: 15px;
+}
+
+.class-form .form-control label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.class-form .form-control input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.class-form .add-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.class-form .add-button:hover {
+  background-color: #0056b3;
+}
+.delete-button {
+  background-color: #dc3545;
+  padding: 5px 10px;
+  margin-right: 10px;
+
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 1em;
+}
+.classes-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+.class-card {
+  background: white;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: -1px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: -1px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -1px 10px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.class-card h3 {
+  margin: 0 0 10px 0;
+  color: #007bff;
+  font-size: 2rem;
+}
+
+.class-card p {
+  margin: 5px 0;
+  color: #333;
+  font-size: 1.6rem;
+}

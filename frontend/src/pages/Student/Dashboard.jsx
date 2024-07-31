@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import Sidebar from './sidebar';
-import dashboardimg from '../../assets/schoolbg.jpeg';
-import './Dashboard.css';
-import { apiBase } from '../../../utils/config'; 
+import React, { useEffect, useState } from "react";
+import Sidebar from "./sidebar";
+import dashboardimg from "../../assets/schoolbg.jpeg";
+import "./Dashboard.css";
+import { apiBase } from "../../../utils/config";
 
 const Dashboard = () => {
   const [data, setData] = useState({
@@ -15,12 +15,13 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [studentsRes, teachersRes, assignmentsRes, classesRes] = await Promise.all([
-          fetch(`${apiBase}/api/student/count`),
-          fetch(`${apiBase}/api/teacher/count`),
-          fetch(`${apiBase}/api/assignment/count`),
-          fetch(`${apiBase}/api/class/count`),
-        ]);
+        const [studentsRes, teachersRes, assignmentsRes, classesRes] =
+          await Promise.all([
+            fetch(`${apiBase}/api/student/count`),
+            fetch(`${apiBase}/api/teacher/count`),
+            fetch(`${apiBase}/api/assignment/count`),
+            fetch(`${apiBase}/api/class/count`),
+          ]);
 
         const studentsData = await studentsRes.json();
         const teachersData = await teachersRes.json();
@@ -34,7 +35,7 @@ const Dashboard = () => {
           classesCount: classesData.count,
         });
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
@@ -46,7 +47,11 @@ const Dashboard = () => {
       <Sidebar />
       <div className="main-content">
         <h1>Dashboard</h1>
-        <img src={dashboardimg} alt="Dashboard Banner" className="dashboard-banner" />
+        <img
+          src={dashboardimg}
+          alt="Dashboard Banner"
+          className="dashboard-banner"
+        />
         <div className="dashboard-cards">
           <div className="dashboard-card">
             <h2>Students</h2>
